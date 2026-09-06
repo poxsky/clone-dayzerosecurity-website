@@ -1,24 +1,30 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 
-const databaseUrl = process.env.DATABASE_URL;
-
-if (!databaseUrl) {
-  throw new Error("DATABASE_URL is required");
-}
-
 const globalForDb = globalThis as typeof globalThis & {
   __arenaNextJsPostgresqlPool?: Pool;
 };
 
-export const pool =
-  globalForDb.__arenaNextJsPostgresqlPool ??
-  new Pool({
-    connectionString: databaseUrl,
-  });
+function getDatabaseUrl() {
+  const databaseUrl = process.env.DATABASE_URL ?? process.env.POSTGRES_URL;
 
-if (process.env.NODE_ENV !== "production") {
-  globalForDb.__arenaNextJsPostgresqlPool = pool;
+  if (!databaseUrl) {
+    throw new Error("DATABASE_URL or POSTGRES_URL is required");
+  }
+
+  return databaseUrl;
 }
 
-export const db = drizzle(pool);
+export function getPool() {
+  if (!globalForDb.__arenaNextJsPostgresqlPool) {
+    globalForDb.__arenaNextJsPostgresqlPool = new Pool({
+      connectionString: getDatabaseUrl(),
+    });
+  }
+
+  return globalForDb.__arenaNextJsPostgresqlPool;
+}
+
+export function getDb() {
+  return drizzle(getPool());
+}

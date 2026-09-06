@@ -1,10 +1,31 @@
 import { NextResponse } from "next/server";
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { quoteRequests } from "@/db/schema";
-import { desc } from "drizzle-orm";
+import { desc, sql } from "drizzle-orm";
+
+export const dynamic = "force-dynamic";
+
+async function ensureQuoteRequestsTable(db: ReturnType<typeof getDb>) {
+  await db.execute(sql`
+    CREATE TABLE IF NOT EXISTS quote_requests (
+      id serial PRIMARY KEY,
+      company_name text NOT NULL,
+      contact_name text NOT NULL,
+      contact_email text NOT NULL,
+      contact_phone text,
+      selected_tab text NOT NULL,
+      selected_services text NOT NULL,
+      objectives text,
+      easter_egg_discount boolean DEFAULT false,
+      estimated_timeline text,
+      status text DEFAULT 'SCOPING_REQUESTED' NOT NULL,
+      created_at timestamp DEFAULT now() NOT NULL
+    )
+  `);
+}
 
 // Seed default sample quote requests if table is empty
-async function seedInitialQuotesIfNeeded() {
+async function seedInitialQuotesIfNeeded(db: ReturnType<typeof getDb>) {
   try {
     const existing = await db.select().from(quoteRequests).limit(1);
     if (existing.length === 0) {
@@ -51,7 +72,9 @@ async function seedInitialQuotesIfNeeded() {
 
 export async function GET() {
   try {
-    await seedInitialQuotesIfNeeded();
+    const db = getDb();
+    await ensureQuoteRequestsTable(db);
+    await seedInitialQuotesIfNeeded(db);
     const quotes = await db
       .select()
       .from(quoteRequests)
@@ -68,6 +91,8 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
+    const db = getDb();
+    await ensureQuoteRequestsTable(db);
     const body = await req.json();
     const {
       companyName,

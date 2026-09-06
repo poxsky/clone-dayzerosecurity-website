@@ -1,8 +1,28 @@
 import { NextResponse } from "next/server";
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { researchEpisodes } from "@/db/schema";
+import { sql } from "drizzle-orm";
 
-async function seedResearchEpisodesIfNeeded() {
+export const dynamic = "force-dynamic";
+
+async function ensureResearchEpisodesTable(db: ReturnType<typeof getDb>) {
+  await db.execute(sql`
+    CREATE TABLE IF NOT EXISTS research_episodes (
+      id serial PRIMARY KEY,
+      episode_number text NOT NULL,
+      title text NOT NULL,
+      track text NOT NULL,
+      published_at text NOT NULL,
+      duration text NOT NULL,
+      cve_tags text NOT NULL,
+      summary text NOT NULL,
+      timestamps text NOT NULL,
+      audio_url text NOT NULL
+    )
+  `);
+}
+
+async function seedResearchEpisodesIfNeeded(db: ReturnType<typeof getDb>) {
   try {
     const existing = await db.select().from(researchEpisodes).limit(1);
     if (existing.length === 0) {
@@ -67,7 +87,9 @@ async function seedResearchEpisodesIfNeeded() {
 
 export async function GET() {
   try {
-    await seedResearchEpisodesIfNeeded();
+    const db = getDb();
+    await ensureResearchEpisodesTable(db);
+    await seedResearchEpisodesIfNeeded(db);
     const episodes = await db.select().from(researchEpisodes);
     return NextResponse.json({ episodes });
   } catch (error) {
