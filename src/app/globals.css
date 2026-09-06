@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: var(--font-roboto-mono), monospace;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-logo {
+    font-family: var(--font-anonymous-pro), monospace;
+  }
+}
+
+.font-anonymous {
+  font-family: var(--font-anonymous-pro), monospace;
+}
+
+.font-mono-tech {
+  font-family: var(--font-roboto-mono), monospace;
+}
+
+/* Custom scrollbar matching high-contrast cyber theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #de5cff;
+}
