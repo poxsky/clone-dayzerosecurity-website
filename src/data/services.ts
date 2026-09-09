@@ -507,16 +507,16 @@ export const SERVICE_CATALOG: ServiceItem[] = [
 
 export const WHY_US = [
   {
-    strength: "A research record, not a pitch deck",
+    strength: "10+ CVEs, 100+ Hall of Fames",
     meaning:
-      "Our vulnerability research carries public, verifiable credit — CVE assignments and Hall of Fame entries you can look up yourself before you ever get on a call with us.",
+      "Our vulnerability research carries public, verifiable credit — over ten CVE assignments and a hundred-plus Hall of Fame recognitions you can look up before you ever get on a call with us.",
     iconKey: "Award",
   },
   {
-    strength: "We attack for a living",
+    strength: "Bug bounty is our day job",
     meaning:
-      "The people who scope your engagement spend the rest of their week breaking live targets in bug bounty. Techniques stay current because the targets are real.",
-    iconKey: "Crosshair",
+      "We hunt live targets every week on Google, Com Olho, YesWeHack and HackenProof — current techniques against real attack surface, not lab machines.",
+    iconKey: "Bug",
   },
   {
     strength: "Nothing unverified reaches your report",

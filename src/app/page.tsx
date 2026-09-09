@@ -28,10 +28,10 @@ import {
 } from "lucide-react";
 
 const STATS = [
-  { value: "6", label: "Core Service Lines" },
-  { value: "25+", label: "Assessment Offerings" },
-  { value: "CVE", label: "Credited Research" },
-  { value: "HoF", label: "Hall of Fame Recognitions" },
+  { value: "10+", label: "CVEs Published" },
+  { value: "100+", label: "Hall of Fame Recognitions" },
+  { value: "Top 20", label: "TryHackMe Global Rank" },
+  { value: "Expert", label: "pwn.college Player" },
 ];
 
 export default function ZeroDaySecurityPage() {
@@ -178,9 +178,9 @@ export default function ZeroDaySecurityPage() {
             </p>
             <p className="font-mono-tech text-zinc-400 text-sm md:text-base max-w-2xl leading-relaxed mb-10">
               Penetration testing, red teaming and application security from a
-              team that lives on live targets, not lab machines. We attack
-              your systems the way a real adversary would — then help you fix
-              what we find.
+              team with 10+ published CVEs and 100+ Hall of Fame
+              recognitions. We attack your systems the way a real adversary
+              would — then help you fix what we find.
             </p>
           </div>
 
@@ -235,8 +235,10 @@ export default function ZeroDaySecurityPage() {
                 0DAY Research Team
               </span>{" "}
               is a six-person offensive security practice built around hands-on
-              research — responsible disclosure, bug bounty and open-source
-              security work. That adversarial mindset is what we bring to every
+              research: 10+ CVEs published through responsible disclosure, 100+
+              Hall of Fame recognitions, a TryHackMe global Top 20 rank, and
+              active bug bounty work across Google, Com Olho, YesWeHack and
+              HackenProof. That adversarial mindset is what we bring to every
               client engagement.
             </p>
             <p className="font-mono-tech text-zinc-400 text-sm md:text-base leading-relaxed">
@@ -249,7 +251,7 @@ export default function ZeroDaySecurityPage() {
               {[
                 {
                   k: "Research-driven",
-                  v: "The techniques behind our published findings, applied to your estate.",
+                  v: "10+ CVEs and 100+ Hall of Fames — public record, verifiable.",
                 },
                 {
                   k: "Manual-first",
