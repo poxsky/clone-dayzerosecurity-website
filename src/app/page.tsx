@@ -164,22 +164,23 @@ export default function ZeroDaySecurityPage() {
         <div className="relative z-10 max-w-[1400px] w-full mx-auto px-6 md:px-10 pt-28 pb-20">
           <div className="pointer-events-none">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded border border-[#de5cff]/40 bg-[#de5cff]/10 text-[#de5cff] font-mono-tech text-[11px] uppercase tracking-[0.2em] mb-6">
-              <ShieldCheck className="w-3.5 h-3.5" /> Security Research &
-              Testing Group
+              <ShieldCheck className="w-3.5 h-3.5" /> Practitioner-led
+              offensive security
             </div>
 
             <h1 className="font-anonymous font-bold uppercase text-white text-5xl sm:text-7xl md:text-8xl lg:text-[6rem] leading-[1.02] tracking-[-0.03em] mb-5">
-              Security. <br />
-              From d<span className="tracking-[-0.08em]">ay</span> zero.
+              We break in <br />
+              before attackers do.
             </h1>
 
             <p className="font-mono-tech text-white/70 font-light text-xl sm:text-2xl md:text-3xl tracking-[-0.02em] max-w-3xl mb-4">
-              Offensive security specialists
+              Offensive security, run by working researchers
             </p>
             <p className="font-mono-tech text-zinc-400 text-sm md:text-base max-w-2xl leading-relaxed mb-10">
-              We help businesses find and fix real security gaps before
-              attackers do — backed by Hall of Fame recognitions and CVE credits
-              from responsible disclosure work.
+              Penetration testing, red teaming and application security from a
+              team that lives on live targets, not lab machines. We attack
+              your systems the way a real adversary would — then help you fix
+              what we find.
             </p>
           </div>
 
@@ -224,7 +225,7 @@ export default function ZeroDaySecurityPage() {
               / Who We Are
             </span>
             <h2 className="font-anonymous font-bold text-3xl md:text-5xl text-white mt-4 leading-tight">
-              A security team that actually breaks things.
+              Researchers first, consultants second.
             </h2>
           </div>
 
@@ -233,23 +234,31 @@ export default function ZeroDaySecurityPage() {
               <span className="text-white font-semibold">
                 0DAY Research Team
               </span>{" "}
-              is a security research and testing group built around a core team
-              with hands-on offensive security experience — including multiple
-              Hall of Fame recognitions and CVE credits from responsible
-              disclosure work.
+              is a six-person offensive security practice built around hands-on
+              research — responsible disclosure, bug bounty and open-source
+              security work. That adversarial mindset is what we bring to every
+              client engagement.
             </p>
             <p className="font-mono-tech text-zinc-400 text-sm md:text-base leading-relaxed">
-              We help businesses find and fix real security gaps before
-              attackers do. That means manually validated findings, exploitation
-              evidence you can reproduce, and reporting your leadership can
-              actually act on.
+              What that means for you: attacks that mirror real adversaries,
+              findings that are reproduced before they are reported, and fixes
+              written so your engineers can ship them the same week.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
               {[
-                { k: "Research-led", v: "CVE & Hall of Fame credited" },
-                { k: "Manual-first", v: "Validated, not scanner noise" },
-                { k: "Business-aware", v: "Risk framed for decisions" },
+                {
+                  k: "Research-driven",
+                  v: "The techniques behind our published findings, applied to your estate.",
+                },
+                {
+                  k: "Manual-first",
+                  v: "Tools sweep; humans confirm, exploit and explain.",
+                },
+                {
+                  k: "Action-oriented",
+                  v: "Risk ranked by business impact, fixes written for engineers.",
+                },
               ].map((b) => (
                 <div
                   key={b.k}
@@ -276,14 +285,15 @@ export default function ZeroDaySecurityPage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-10">
           <div className="text-center mb-12">
             <span className="font-mono-tech text-[11px] uppercase tracking-[0.25em] text-[#de5cff]">
-              / Core Services
+              / What We Do
             </span>
             <h2 className="font-anonymous font-bold text-3xl md:text-5xl text-white mt-4">
-              Cybersecurity Services Overview
+              Six practice areas, one team
             </h2>
             <p className="font-mono-tech text-zinc-400 text-sm md:text-base mt-4 max-w-2xl mx-auto">
-              Six core service lines covering offensive testing, application
-              security, compliance, people and response.
+              Twenty-four defined engagements, from a single penetration test to
+              year-round managed security — pick the work you need, skip the
+              rest.
             </p>
           </div>
 
@@ -519,15 +529,15 @@ export default function ZeroDaySecurityPage() {
           {/* Left */}
           <div className="lg:col-span-5 space-y-6">
             <span className="font-mono-tech text-[11px] uppercase tracking-[0.25em] text-[#de5cff]">
-              / Get In Touch
+              / Start a Project
             </span>
             <h2 className="font-anonymous font-bold text-3xl md:text-4xl text-white leading-tight">
-              Let&apos;s talk about your security posture.
+              Tell us what needs testing.
             </h2>
             <p className="font-mono-tech text-sm md:text-base text-zinc-400 leading-relaxed">
-              We&apos;d welcome the chance to walk you through how we can
-              support your security posture — from a one-time assessment to an
-              ongoing partnership.
+              Send the form with whatever scope details you have — rough is
+              fine. We&apos;ll come back with clarifying questions and a
+              proposal. No sales calls, no obligation.
             </p>
 
             <div className="p-6 rounded-lg bg-[#111] border border-zinc-800 space-y-4">
@@ -641,7 +651,7 @@ export default function ZeroDaySecurityPage() {
                       required
                       value={contactName}
                       onChange={(e) => setContactName(e.target.value)}
-                      placeholder="e.g. Priya Sharma (IT Head)"
+                      placeholder="Your name (role) — e.g. IT Head"
                       className="w-full pl-10 pr-4 py-2.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:outline-none focus:border-[#de5cff]"
                     />
                   </div>
@@ -722,7 +732,7 @@ export default function ZeroDaySecurityPage() {
                   rows={3}
                   value={objectives}
                   onChange={(e) => setObjectives(e.target.value)}
-                  placeholder="Applications, network ranges, cloud accounts, compliance drivers, red team goals..."
+                  placeholder="What's in scope — apps, IP ranges, cloud accounts, environment size, compliance deadlines..."
                   className="w-full p-3.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:outline-none focus:border-[#de5cff]"
                 />
               </div>
@@ -763,10 +773,10 @@ export default function ZeroDaySecurityPage() {
                 <span className="text-[#de5cff]">0day</span> Security
               </h4>
               <span className="font-mono-tech font-light text-lg md:text-xl leading-relaxed tracking-[-0.02em] text-zinc-300 block max-w-sm">
-                Serious Security for <br />
-                Serious Businesses.
+                Real attacks. <br />
+                Real findings.
                 <br />
-                From day zero.
+                Real fixes.
               </span>
             </div>
 

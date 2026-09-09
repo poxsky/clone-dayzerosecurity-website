@@ -32,18 +32,18 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     index: "01",
     label: "Vulnerability Assessment & Penetration Testing",
     shortLabel: "VAPT",
-    headline: "Vulnerability Assessment & Penetration Testing",
+    headline: "Tested the way an attacker would test it",
     blurb:
-      "Full-spectrum VAPT across networks, web, APIs, mobile and wireless — every finding manually validated by the team, never raw scanner output.",
+      "One engagement can stretch from your internet-facing perimeter to internal networks, web apps, APIs, mobile builds and office Wi-Fi. Tooling handles the crawling — our testers handle the exploiting, and nothing lands in your report unverified.",
     highlights: [
       {
-        title: "Manually Validated Findings",
-        body: "Automated tooling gives us coverage; our engineers give you certainty. Every issue is exploited, evidenced and triaged by hand to eliminate false positives.",
+        title: "Nothing unverified",
+        body: "Scanners get exactly one job: coverage. Every issue that reaches your report has been reproduced and risk-rated by a tester, so your team spends its time fixing real risk instead of chasing false positives.",
         iconKey: "ShieldCheck",
       },
       {
-        title: "OWASP & PTES Methodology",
-        body: "Testing follows peer-reviewed industry methodology (OWASP Testing Guide, OWASP ASVS/MASVS and PTES) so results are repeatable, defensible and audit-ready.",
+        title: "A methodology you can defend",
+        body: "Testing maps to the OWASP Testing Guide, OWASP ASVS/MASVS and PTES — so your auditors, insurers and enterprise customers can trace every test back to a recognised standard.",
         iconKey: "Target",
       },
     ],
@@ -53,18 +53,18 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     index: "02",
     label: "Red Teaming & Attack Simulation",
     shortLabel: "Red Teaming",
-    headline: "Red Teaming & Attack Simulation",
+    headline: "One question: will you notice?",
     blurb:
-      "Real-world adversary simulation that measures how your people, processes and technology actually detect, respond to and recover from an attack.",
+      "A red team exercise measures what a vulnerability scan cannot — whether your people, processes and tooling actually detect and contain a patient, determined attacker working toward a concrete objective.",
     highlights: [
       {
-        title: "Real-World Adversary Simulation",
-        body: "Objective-based operations executed the way a determined threat actor would — testing detection and response, not just the existence of a vulnerability.",
+        title: "Objective-driven operations",
+        body: "We agree a target — reach the finance server, exfiltrate a marked file — then operate the way a real threat actor would: foothold, escalation, lateral movement, exfiltration. Success is judged against your defences, not a checklist.",
         iconKey: "Crosshair",
       },
       {
-        title: "Threat Modeling & Compromise Assessment",
-        body: "We model the threats that actually matter to your business, then hunt for evidence that an intrusion has already happened in your environment.",
+        title: "Find out if you're already owned",
+        body: "Before or alongside the exercise, we hunt through endpoints, identities and logs for signs of a live intrusion — persistence, beaconing, dwell time — so you know the difference between 'secure' and 'not yet discovered'.",
         iconKey: "Flag",
       },
     ],
@@ -74,18 +74,18 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     index: "03",
     label: "Application Security",
     shortLabel: "AppSec",
-    headline: "Application Security",
+    headline: "Security that ships with the product",
     blurb:
-      "Security built into the product — from deep application testing and source code review to secure development advisory and cloud posture assessment.",
+      "Application security that reaches the code, not just the running app: deep testing with source access, line-by-line review, and coaching that stops your developers reintroducing the same class of bug next sprint.",
     highlights: [
       {
-        title: "Code-Assisted Security Testing",
-        body: "Grey-box and white-box review combining application testing with source code analysis to uncover logic flaws that black-box testing alone will miss.",
+        title: "Testing with the code open",
+        body: "Grey-box and white-box work pairs live exploitation with source review — the combination that surfaces the logic and authorization flaws black-box scanning structurally cannot see.",
         iconKey: "Code2",
       },
       {
-        title: "Secure by Design Advisory",
-        body: "Practical guidance for your engineering teams: secure design patterns, SDLC integration, dependency hygiene and cloud architecture hardening.",
+        title: "Fix the class, not the instance",
+        body: "Design reviews, secure patterns, CI/CD security gates and dependency hygiene — so the vulnerability we report today doesn't reappear in next month's release.",
         iconKey: "Network",
       },
     ],
@@ -95,18 +95,18 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     index: "04",
     label: "Compliance & Risk Advisory",
     shortLabel: "Compliance",
-    headline: "Compliance & Risk Advisory",
+    headline: "Audit-ready without the theatre",
     blurb:
-      "Get audit-ready and stay there — ISO 27001 readiness, GDPR and India's DPDP Act advisory, vendor risk and enterprise risk management.",
+      "Certification work grounded in how you actually operate. We map your current practices against ISO 27001, SOC 2, PCI DSS or India's DPDP Act, close the gaps that matter, and build the evidence trail your auditor expects to see.",
     highlights: [
       {
-        title: "ISO 27001 & Regulatory Readiness",
-        body: "Gap assessment, control mapping, policy and evidence preparation so you walk into your audit knowing exactly where you stand.",
+        title: "Know where you stand first",
+        body: "Control gap assessments, policy packs and evidence preparation completed before the audit is booked — you walk in already knowing the outcome.",
         iconKey: "ClipboardCheck",
       },
       {
-        title: "Data Protection & Vendor Risk",
-        body: "GDPR and DPDP Act compliance advisory, data flow mapping, and structured third-party risk assessment for your supply chain.",
+        title: "Risk that reads like the business",
+        body: "Risk registers scored by real business impact and vendor exposure, written for leadership to govern — not to gather dust in a shared drive.",
         iconKey: "Scale",
       },
     ],
@@ -116,18 +116,18 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     index: "05",
     label: "Security Awareness & Training",
     shortLabel: "Awareness",
-    headline: "Security Awareness & Training",
+    headline: "Make your people the hardest target",
     blurb:
-      "Your people are the largest attack surface. We train them with the same techniques we use against them in live engagements.",
+      "Attackers email your staff long before they touch your firewall. We train and test people using the same social-engineering techniques we deploy in live operations — then measure what actually changed.",
     highlights: [
       {
-        title: "Phishing Simulation Campaigns",
-        body: "Realistic, measurable campaigns with click-through and credential-capture metrics, plus just-in-time coaching for users who fall for it.",
+        title: "Phishing tests that teach",
+        body: "Simulation campaigns with realistic pretexts, measured click-through and credential capture, gateway-bypass findings, and immediate blame-free coaching for anyone who took the bait.",
         iconKey: "MailWarning",
       },
       {
-        title: "Corporate Training Programs",
-        body: "Role-based training for staff, developers and leadership — delivered by practitioners with real offensive security experience.",
+        title: "Taught by practitioners",
+        body: "Role-based sessions for staff, developers and leadership, run by the same people who exploit these weaknesses for a living — not a generic video library.",
         iconKey: "GraduationCap",
       },
     ],
@@ -137,18 +137,18 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
     index: "06",
     label: "Incident Response & Managed Security",
     shortLabel: "IR & Managed",
-    headline: "Incident Response & Managed Security",
+    headline: "Ready before, supported during",
     blurb:
-      "Be ready before the incident, and supported through it — response planning, threat analysis and retainer-based monitoring and support.",
+      "The worst moment to design a breach response is mid-breach. We build the playbooks and rehearse them in advance, then stay on call through the year — on fixed packages, not panic-rate consulting.",
     highlights: [
       {
-        title: "Incident Response Planning",
-        body: "Playbooks, escalation paths and tabletop exercises so your team knows exactly what to do in the first hour of a breach.",
+        title: "Rehearsed before it's real",
+        body: "Response plans, severity ladders and escalation chains pressure-tested in tabletop exercises with the people who would actually run the response.",
         iconKey: "Siren",
       },
       {
-        title: "Retainer-Based Managed Security",
-        body: "Ongoing monitoring, threat analysis and on-call expertise — including vCISO support for organisations without an in-house security lead.",
+        title: "A security team as a service",
+        body: "Recurring monitoring, threat analysis and on-call specialists — including vCISO cover for organisations that need the expertise without the headcount.",
         iconKey: "Radar",
       },
     ],
@@ -163,11 +163,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "vapt",
     iconKey: "Server",
     methodology:
-      "Internal and external network penetration testing covering perimeter exposure, service enumeration, Active Directory attack paths, privilege escalation and network segmentation validation.",
+      "Internal and external network testing that answers three questions: what's exposed, what's reachable once an attacker is inside, and how far they travel. Service enumeration, Active Directory attack paths, privilege escalation and segmentation checks — from the outside and from an assumed foothold.",
     deliverables: [
-      "External & Internal Attack Surface Map",
-      "Prioritised Vulnerability & Misconfiguration Matrix",
-      "Segmentation & Hardening Roadmap",
+      "Mapped external & internal attack paths",
+      "Findings ranked by reach and exploitability",
+      "Segmentation & hardening fix plan",
     ],
     typicalDuration: "1–3 Weeks",
   },
@@ -177,11 +177,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "vapt",
     iconKey: "Globe",
     methodology:
-      "Manual, source-assisted testing well beyond the OWASP Top 10 — authentication and session flaws, access control (IDOR/BOLA), business logic abuse, SSRF, injection and deserialisation.",
+      "Hands-on testing well past the OWASP Top 10: authentication and session weaknesses, broken access control (IDOR/BOLA), business logic abuse, SSRF, injection and unsafe deserialisation — with source access when you can share it.",
     deliverables: [
-      "Technical Report with Reproduction Steps",
-      "Proof-of-Concept Exploits & HTTP Requests",
-      "Free Remediation Retest",
+      "Findings with full reproduction steps",
+      "Working proof-of-concept requests",
+      "Free retest once fixes are in",
     ],
     typicalDuration: "1–3 Weeks",
   },
@@ -191,11 +191,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "vapt",
     iconKey: "Code2",
     methodology:
-      "REST, GraphQL and gRPC assessment aligned to the OWASP API Security Top 10 — broken object/function level authorization, mass assignment, JWT flaws and rate-limit bypass.",
+      "REST, GraphQL and gRPC endpoints tested object by object and role by role — broken object- and function-level authorization, mass assignment, JWT and token flaws, excessive data exposure and rate-limit bypasses.",
     deliverables: [
-      "Endpoint-by-Endpoint Authorization Matrix",
-      "Postman / Burp Exploit Collection",
-      "API Gateway & Schema Hardening Guidance",
+      "Per-endpoint, per-role authorization matrix",
+      "Replayable exploit collection (Burp / Postman)",
+      "Gateway & schema hardening notes",
     ],
     typicalDuration: "1–2 Weeks",
   },
@@ -205,11 +205,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "vapt",
     iconKey: "Smartphone",
     methodology:
-      "Android and iOS assessment against OWASP MASVS — static and dynamic analysis, insecure local storage, certificate pinning bypass, root/jailbreak detection and backend API abuse.",
+      "Android and iOS builds assessed against OWASP MASVS — static and runtime analysis, insecure local storage, weak certificate pinning, root and jailbreak detection, and how the backend API survives direct attack.",
     deliverables: [
-      "MASVS-Mapped Findings Report",
-      "Reverse Engineering & Runtime Analysis Evidence",
-      "Client & Backend Remediation Plan",
+      "MASVS-mapped findings report",
+      "Reverse-engineering & runtime evidence",
+      "Fix list for client and backend",
     ],
     typicalDuration: "1–2 Weeks",
   },
@@ -219,11 +219,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "vapt",
     iconKey: "Wifi",
     methodology:
-      "Corporate Wi-Fi assessment covering WPA2/WPA3 Enterprise, rogue and evil-twin access points, EAP credential capture, and guest/corporate network isolation.",
+      "On-site review of corporate and guest Wi-Fi: WPA2/WPA3-Enterprise configuration, rogue and evil-twin access points, EAP credential exposure, and whether guest networks are genuinely isolated from corporate systems.",
     deliverables: [
-      "RF Survey & Rogue AP Analysis",
-      "802.1X / RADIUS Configuration Review",
-      "Wireless Segmentation Audit",
+      "Rogue AP & RF survey results",
+      "802.1X / RADIUS configuration review",
+      "Wireless isolation audit",
     ],
     typicalDuration: "3–5 Days",
   },
@@ -233,11 +233,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "vapt",
     iconKey: "ScanSearch",
     methodology:
-      "Authenticated and unauthenticated scanning with OpenVAS, Acunetix and Burp Suite, followed by manual triage, risk-rating and a tracked remediation lifecycle.",
+      "Authenticated and unauthenticated scan cycles with manual triage layered on top — de-duplicated, risk-rated findings and a tracked fix workflow, so the register shrinks each quarter instead of quietly growing.",
     deliverables: [
-      "Validated, De-Duplicated Findings Register",
-      "CVSS + Business-Context Risk Ratings",
-      "Recurring Scan Cadence & Trend Reporting",
+      "Clean, de-duplicated findings register",
+      "CVSS scores with business context",
+      "Quarterly trend & fix tracking",
     ],
     typicalDuration: "Ongoing / Quarterly",
   },
@@ -249,11 +249,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "redteam",
     iconKey: "Crosshair",
     methodology:
-      "Covert, objective-based operations mapped to MITRE ATT&CK — initial access, C2, privilege escalation, lateral movement and domain dominance, all under agreed rules of engagement.",
+      "Covert, objective-based operations mapped to MITRE ATT&CK — initial access through C2, escalation and lateral movement to the agreed goal, all inside negotiated rules of engagement and a deconfliction channel.",
     deliverables: [
-      "Executive Cyber Resilience Narrative",
-      "MITRE ATT&CK Detection & Response Heatmap",
-      "Blue Team Replay Timeline & Telemetry Gaps",
+      "Executive narrative of the operation",
+      "MITRE ATT&CK detection heatmap",
+      "Blue-team replay timeline & telemetry gaps",
     ],
     typicalDuration: "4–6 Weeks",
   },
@@ -263,11 +263,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "redteam",
     iconKey: "GitBranch",
     methodology:
-      "Structured threat modeling of your critical assets and data flows, converted into targeted attack scenarios that validate whether your controls actually stop them.",
+      "We map your crown-jewel assets and the data flows around them, model the attacks that could realistically reach them, then test whether the controls you've deployed actually stop those specific scenarios.",
     deliverables: [
-      "Trust Boundary & Data Flow Threat Model",
-      "Prioritised Attack Scenario Library",
-      "Control Effectiveness Scorecard",
+      "Data-flow & trust boundary model",
+      "Prioritised attack scenario library",
+      "Control effectiveness scorecard",
     ],
     typicalDuration: "2–3 Weeks",
   },
@@ -277,11 +277,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "redteam",
     iconKey: "Fingerprint",
     methodology:
-      "Threat hunt across endpoints, identity systems and logs to determine whether your environment is already compromised, and to surface persistence and dwell-time indicators.",
+      "A focused hunt across endpoints, identity systems and logs for evidence that an intrusion is already live — persistence mechanisms, beaconing patterns, and the indicators an attacker hoped nobody would look for.",
     deliverables: [
-      "Indicators of Compromise (IOC) Findings",
-      "Persistence & Dwell-Time Analysis",
-      "Containment & Eradication Recommendations",
+      "Indicators of compromise report",
+      "Persistence & dwell-time analysis",
+      "Containment & eradication plan",
     ],
     typicalDuration: "2–4 Weeks",
   },
@@ -293,11 +293,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "appsec",
     iconKey: "Bug",
     methodology:
-      "Deep product security assessment across web, mobile, thick-client and API surfaces with an emphasis on business logic and authorization flaws unique to your application.",
+      "A product-level deep dive across web, mobile, thick-client and API surfaces, weighted toward the business-logic and authorization bugs that are unique to how your product actually works.",
     deliverables: [
-      "Severity-Ranked Findings with PoCs",
-      "Developer-Focused Fix Guidance",
-      "Post-Fix Verification Retest",
+      "Severity-ranked findings with PoCs",
+      "Fix guidance written for developers",
+      "Post-fix verification retest",
     ],
     typicalDuration: "1–3 Weeks",
   },
@@ -307,11 +307,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "appsec",
     iconKey: "FileCode2",
     methodology:
-      "Manual secure code review supported by SAST — injection sinks, authentication and crypto misuse, secrets in code, unsafe deserialisation and vulnerable dependencies.",
+      "Manual review backed by static analysis — injection sinks, cryptographic and authentication misuse, hardcoded secrets, unsafe deserialisation and stale dependencies — reported line by line with fix patterns included.",
     deliverables: [
-      "Line-Referenced Vulnerability Report",
-      "Secure Code Patterns & Fix Snippets",
-      "Dependency & Supply Chain Risk Review",
+      "Line-referenced vulnerability report",
+      "Secure code patterns & snippets",
+      "Dependency & supply-chain review",
     ],
     typicalDuration: "1–3 Weeks",
   },
@@ -321,11 +321,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "appsec",
     iconKey: "Blocks",
     methodology:
-      "Hands-on advisory to embed security into your SDLC — design reviews, threat modeling workshops, CI/CD security gates and developer enablement.",
+      "Advisory that moves security left: architecture and design reviews, threat-modeling workshops, CI/CD security gates and coaching that makes the secure choice the easy choice for your engineering team.",
     deliverables: [
-      "SDLC Security Maturity Assessment",
-      "CI/CD Security Gate Blueprint",
-      "Developer Secure Coding Workshops",
+      "SDLC maturity assessment",
+      "CI/CD security gate blueprint",
+      "Developer workshops & labs",
     ],
     typicalDuration: "Ongoing / Retainer",
   },
@@ -335,11 +335,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "appsec",
     iconKey: "Cloud",
     methodology:
-      "AWS, Azure and GCP configuration and architecture review — IAM privilege escalation paths, key management, container and Kubernetes isolation, logging and network perimeter controls.",
+      "AWS, Azure and GCP configuration and architecture review — IAM escalation paths, key management, Kubernetes and container isolation, logging coverage and network boundaries, benchmarked against CIS.",
     deliverables: [
-      "CIS Benchmark Gap Analysis",
-      "IAM Privilege Escalation Path Diagram",
-      "Infrastructure-as-Code Remediation Snippets",
+      "CIS benchmark gap analysis",
+      "IAM escalation path diagram",
+      "Infrastructure-as-code fix snippets",
     ],
     typicalDuration: "1–2 Weeks",
   },
@@ -351,11 +351,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "compliance",
     iconKey: "ClipboardCheck",
     methodology:
-      "Annex A control gap assessment, ISMS documentation support, internal audit preparation and stage 1/2 certification audit assistance.",
+      "Annex A gap assessment, ISMS documentation, internal audit dry runs and hands-on support through stage 1 and stage 2 certification — sized to your organisation rather than padded to a template.",
     deliverables: [
-      "Annex A Control Gap Register",
-      "ISMS Policy & Evidence Pack",
-      "Audit Readiness Action Plan",
+      "Annex A gap register",
+      "ISMS policy & evidence pack",
+      "Audit readiness action plan",
     ],
     typicalDuration: "4–12 Weeks",
   },
@@ -365,11 +365,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "compliance",
     iconKey: "Scale",
     methodology:
-      "Data protection advisory covering data mapping, lawful basis, consent design, breach notification readiness and technical/organisational safeguards under GDPR and India's DPDP Act.",
+      "Practical data-protection advisory under GDPR and India's DPDP Act — data mapping, lawful basis, consent flows, breach-notification readiness and the technical safeguards an auditor will ask to see.",
     deliverables: [
-      "Personal Data Inventory & Flow Map",
-      "Privacy Gap Assessment & Remediation Plan",
-      "Breach Notification Playbook",
+      "Personal data inventory & flow map",
+      "Privacy gap & fix plan",
+      "Breach notification playbook",
     ],
     typicalDuration: "3–8 Weeks",
   },
@@ -379,11 +379,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "compliance",
     iconKey: "SearchCheck",
     methodology:
-      "Assessment against the frameworks that apply to you — SOC 2, PCI DSS, RBI/CERT-In directions, HIPAA and NIST CSF — with a consolidated, de-duplicated control set.",
+      "Where you stand against the frameworks that actually apply to you — SOC 2, PCI DSS, RBI/CERT-In directions, HIPAA, NIST CSF — consolidated into one de-duplicated control set instead of five overlapping audits.",
     deliverables: [
-      "Multi-Framework Control Mapping",
-      "Consolidated Gap & Risk Register",
-      "Phased Compliance Roadmap",
+      "Multi-framework control mapping",
+      "Consolidated gap & risk register",
+      "Phased compliance roadmap",
     ],
     typicalDuration: "3–6 Weeks",
   },
@@ -393,11 +393,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "compliance",
     iconKey: "Handshake",
     methodology:
-      "Supply chain risk review combining vendor security questionnaires, external attack surface validation and contractual security requirement analysis.",
+      "Supply-chain review that goes beyond questionnaires: vendor security posture, validation of their external exposure, and contract clauses that make security obligations enforceable rather than aspirational.",
     deliverables: [
-      "Vendor Risk Tiering & Scorecards",
-      "External Exposure Validation Results",
-      "Contractual Security Clause Recommendations",
+      "Vendor risk tiering & scorecards",
+      "External exposure validation",
+      "Contract clause recommendations",
     ],
     typicalDuration: "2–4 Weeks",
   },
@@ -407,11 +407,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "compliance",
     iconKey: "TrendingUp",
     methodology:
-      "Enterprise security risk assessment with business-impact-weighted scoring, treatment planning and an ongoing risk register your leadership can actually govern.",
+      "Enterprise risk assessment weighted by real business impact — what an outage, breach or data loss would actually cost you — with treatment plans and a register your leadership can govern quarter after quarter.",
     deliverables: [
-      "Business-Weighted Risk Register",
-      "Risk Treatment & Acceptance Plan",
-      "Board-Level Risk Reporting Pack",
+      "Business-weighted risk register",
+      "Treatment & acceptance plan",
+      "Board-level reporting pack",
     ],
     typicalDuration: "2–5 Weeks",
   },
@@ -423,11 +423,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "awareness",
     iconKey: "Users",
     methodology:
-      "Practitioner-led awareness sessions using real breach case studies and live demonstrations — social engineering, credential hygiene, MFA fatigue and safe data handling.",
+      "Live sessions built on real breach case studies and demonstrations — social engineering, credential hygiene, MFA fatigue and safe data handling — tuned to the risk each audience actually faces.",
     deliverables: [
-      "Role-Based Training Delivery",
-      "Pre/Post Knowledge Assessment Metrics",
-      "Reusable Training Material Pack",
+      "Role-based session delivery",
+      "Before/after knowledge metrics",
+      "Reusable training materials",
     ],
     typicalDuration: "1–2 Days per Cohort",
   },
@@ -437,11 +437,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "awareness",
     iconKey: "MailWarning",
     methodology:
-      "Targeted spear-phishing campaigns with custom pretexting and MFA-bypass proxy infrastructure, measuring both user behaviour and email gateway effectiveness.",
+      "Custom-pretext campaigns with credential-capture and MFA-bypass infrastructure, measuring both how users behave and how your email gateway handles a live attack.",
     deliverables: [
-      "Click-Through & Credential Harvest Metrics",
-      "Email Gateway Bypass Findings",
-      "Just-in-Time User Coaching Workflow",
+      "Click & credential-capture metrics",
+      "Email gateway bypass findings",
+      "Just-in-time coaching workflow",
     ],
     typicalDuration: "2–3 Weeks",
   },
@@ -451,11 +451,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "awareness",
     iconKey: "GraduationCap",
     methodology:
-      "Structured multi-module programs for developers, IT/ops and leadership — secure coding, cloud security, incident handling and executive cyber risk literacy.",
+      "Multi-module programs for developers, IT/ops and leadership — secure coding, cloud security, incident handling and executive risk literacy — built around hands-on labs, not slide decks.",
     deliverables: [
-      "Custom Curriculum & Lab Exercises",
-      "Hands-On Secure Coding Labs",
-      "Completion Reporting & Certificates",
+      "Custom curriculum & labs",
+      "Hands-on secure coding practice",
+      "Completion reports & certificates",
     ],
     typicalDuration: "Ongoing / Quarterly",
   },
@@ -467,11 +467,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "ir",
     iconKey: "Siren",
     methodology:
-      "Development of IR policy, severity classification, escalation matrices and scenario-specific playbooks, validated through executive and technical tabletop exercises.",
+      "Response policy, severity classification, escalation matrices and scenario playbooks — then tabletop exercises with the people who would actually run the response, so gaps surface in a conference room instead of a crisis.",
     deliverables: [
-      "Incident Response Plan & Playbooks",
-      "Escalation & Communication Matrix",
-      "Tabletop Exercise Report",
+      "Response plan & scenario playbooks",
+      "Escalation & communication matrix",
+      "Tabletop exercise report",
     ],
     typicalDuration: "2–4 Weeks",
   },
@@ -481,11 +481,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "ir",
     iconKey: "Radar",
     methodology:
-      "Retainer-based monitoring and advisory: recurring assessments, guaranteed response SLAs, on-call expertise and vCISO support for security governance.",
+      "A fixed recurring package: scheduled assessments, guaranteed response times, on-call specialists and vCISO guidance — predictable cost, no panic rates, no surprise invoices.",
     deliverables: [
-      "Guaranteed Response SLA",
-      "Recurring Assessment & Reporting Cycle",
-      "vCISO Advisory Hours",
+      "Guaranteed response SLA",
+      "Recurring assessment & reporting cycle",
+      "vCISO advisory hours",
     ],
     typicalDuration: "Monthly / Annual Retainer",
   },
@@ -495,11 +495,11 @@ export const SERVICE_CATALOG: ServiceItem[] = [
     category: "ir",
     iconKey: "ShieldAlert",
     methodology:
-      "Threat intelligence tailored to your sector and tech stack, converted into detection rules, hardening actions and preventative controls your team can deploy.",
+      "Threat intelligence filtered to your sector and tech stack, translated into detection rules, hardening changes and preventive controls your team can put in place this quarter.",
     deliverables: [
-      "Sector-Specific Threat Briefings",
-      "Detection Rule & Use-Case Pack",
-      "Preventative Control Recommendations",
+      "Sector-specific threat briefings",
+      "Detection rule & use-case pack",
+      "Preventive control recommendations",
     ],
     typicalDuration: "Ongoing / Retainer",
   },
@@ -507,33 +507,33 @@ export const SERVICE_CATALOG: ServiceItem[] = [
 
 export const WHY_US = [
   {
-    strength: "Hands-on offensive security team",
+    strength: "A research record, not a pitch deck",
     meaning:
-      "Findings are manually validated, not just scanner output — every issue is proven before it reaches your report.",
-    iconKey: "Crosshair",
-  },
-  {
-    strength: "Hall of Fame credits & CVEs",
-    meaning:
-      "A proven, publicly verifiable research track record from responsible disclosure work with real vendors.",
+      "Our vulnerability research carries public, verifiable credit — CVE assignments and Hall of Fame entries you can look up yourself before you ever get on a call with us.",
     iconKey: "Award",
   },
   {
-    strength: "Industry-standard tooling",
+    strength: "We attack for a living",
     meaning:
-      "OpenVAS, Acunetix, Burp Suite and a manual testing methodology grounded in OWASP and PTES.",
-    iconKey: "Terminal",
+      "The people who scope your engagement spend the rest of their week breaking live targets in bug bounty. Techniques stay current because the targets are real.",
+    iconKey: "Crosshair",
   },
   {
-    strength: "Business-first reporting",
+    strength: "Nothing unverified reaches your report",
     meaning:
-      "Executive summaries leadership can act on — not just technical jargon dumped into a PDF.",
+      "Tooling sweeps for coverage; testers confirm, reproduce and rate every finding by hand. You spend your time fixing real risk, not triaging scanner noise.",
+    iconKey: "ShieldCheck",
+  },
+  {
+    strength: "Reports built to be acted on",
+    meaning:
+      "An executive summary your leadership can decide with, reproduction steps your engineers can follow, and a retest to confirm the fixes held — the loop closes with us, not with a filed PDF.",
     iconKey: "FileText",
   },
   {
-    strength: "Flexible engagement",
+    strength: "Engagements shaped around you",
     meaning:
-      "One-time VAPT, periodic retainer, or ongoing vCISO support — structured around how your business actually works.",
+      "A one-time assessment, a recurring cycle or a year-round retainer — the structure follows your risk and your budget, not our convenience.",
     iconKey: "Handshake",
   },
 ];
