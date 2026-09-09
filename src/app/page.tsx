@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import PurpleFluidCanvas from "@/components/PurpleFluidCanvas";
 import Icon from "@/components/Icon";
 import {
@@ -975,6 +976,17 @@ export default function ZeroDaySecurityPage() {
                   {submitting ? "Sending..." : "Send Request"}
                 </button>
               </div>
+
+              <p className="font-mono-tech text-[11px] text-zinc-500 leading-relaxed">
+                By submitting, you agree to our{" "}
+                <Link
+                  href="/privacy"
+                  className="text-[#de5cff] hover:underline"
+                >
+                  Privacy Policy
+                </Link>
+                . We use these details only to respond to your enquiry.
+              </p>
             </form>
           </div>
         </div>
@@ -1050,9 +1062,17 @@ export default function ZeroDaySecurityPage() {
           </div>
 
           <div className="pt-8 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="font-anonymous text-zinc-500 text-sm">
-              &copy; 2026 0DAY Research Team. All rights reserved.
-            </p>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+              <p className="font-anonymous text-zinc-500 text-sm">
+                &copy; 2026 0DAY Research Team. All rights reserved.
+              </p>
+              <Link
+                href="/privacy"
+                className="font-mono-tech text-[11px] text-zinc-500 hover:text-[#de5cff] transition"
+              >
+                Privacy Policy
+              </Link>
+            </div>
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               aria-label="Scroll to top"
