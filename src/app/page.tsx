@@ -10,6 +10,7 @@ import {
   type CategoryId,
   type ServiceItem,
 } from "@/data/services";
+import { FOUNDER, TEAM_ROLES } from "@/data/team";
 import {
   ArrowUp,
   ArrowRight,
@@ -139,6 +140,9 @@ export default function ZeroDaySecurityPage() {
             </a>
             <a href="#why" className="hover:text-[#de5cff] transition">
               Why Us
+            </a>
+            <a href="#team" className="hover:text-[#de5cff] transition">
+              Team
             </a>
             <a href="#contact" className="hover:text-[#de5cff] transition">
               Contact
@@ -519,6 +523,114 @@ export default function ZeroDaySecurityPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ===================== TEAM ===================== */}
+      <section id="team" className="bg-black border-t border-zinc-900 py-24">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+          <div className="mb-12 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+            <div>
+              <span className="font-mono-tech text-[11px] uppercase tracking-[0.25em] text-[#de5cff]">
+                / The Team
+              </span>
+              <h2 className="font-anonymous font-bold text-3xl md:text-5xl text-white mt-4">
+                Six specialists. One adversary mindset.
+              </h2>
+            </div>
+            <p className="font-mono-tech text-sm md:text-base text-zinc-400 max-w-md leading-relaxed">
+              Small by design — the people who scope your work are the people
+              who do the work, from the first call to the final retest.
+            </p>
+          </div>
+
+          {/* Founder */}
+          <div className="rounded-lg border border-[#de5cff]/40 bg-gradient-to-br from-[#1a0b22] to-[#0d0d0d] p-6 md:p-9 mb-6 shadow-[0_0_25px_rgba(192,0,240,0.12)] grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div className="lg:col-span-4 space-y-4">
+              <div className="p-2.5 rounded-lg bg-[#de5cff]/10 border border-[#de5cff]/30 text-[#de5cff] w-max">
+                <Icon name={FOUNDER.iconKey} className="w-7 h-7" />
+              </div>
+              <div>
+                <h3 className="font-anonymous font-bold text-2xl md:text-3xl text-white leading-tight">
+                  {FOUNDER.name}
+                </h3>
+                <span className="inline-block mt-2.5 px-2.5 py-1 rounded bg-[#de5cff]/15 text-[#de5cff] font-mono-tech text-[10px] uppercase tracking-wider border border-[#de5cff]/30">
+                  {FOUNDER.role}
+                </span>
+              </div>
+              <p className="font-mono-tech text-sm text-zinc-400 leading-relaxed">
+                {FOUNDER.focus}
+              </p>
+              <div className="space-y-1.5 font-mono-tech text-xs pt-1">
+                <a
+                  href={`mailto:${FOUNDER.email}`}
+                  className="flex items-center gap-2 text-zinc-300 hover:text-[#de5cff] transition break-all"
+                >
+                  <Mail className="w-3.5 h-3.5 text-[#de5cff] shrink-0" />
+                  {FOUNDER.email}
+                </a>
+                <a
+                  href={`mailto:${FOUNDER.personalEmail}`}
+                  className="flex items-center gap-2 text-zinc-500 hover:text-[#de5cff] transition break-all"
+                >
+                  <User className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+                  {FOUNDER.personalEmail} (personal)
+                </a>
+              </div>
+            </div>
+            <div className="lg:col-span-8 lg:border-l lg:border-zinc-800 lg:pl-8">
+              <span className="font-mono-tech text-[10px] uppercase tracking-wider text-zinc-500 block mb-4">
+                Published, verifiable credentials
+              </span>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                {FOUNDER.credentials?.map((c) => (
+                  <li
+                    key={c}
+                    className="flex items-start gap-2.5 font-mono-tech text-xs md:text-[13px] text-zinc-300 leading-relaxed"
+                  >
+                    <CheckCircle2 className="w-4 h-4 text-[#de5cff] mt-0.5 shrink-0" />
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Role cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {TEAM_ROLES.map((m) => (
+              <div
+                key={m.id}
+                className="rounded-[6px] p-6 bg-[#0f0f0f] border border-zinc-800 hover:border-zinc-700 transition h-full"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className="p-2.5 rounded-lg bg-[#de5cff]/10 border border-[#de5cff]/30 text-[#de5cff]">
+                    <Icon name={m.iconKey} className="w-6 h-6" />
+                  </div>
+                  {m.headcount ? (
+                    <span className="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-700 font-mono-tech text-[10px] text-[#de5cff]">
+                      ×{m.headcount}
+                    </span>
+                  ) : null}
+                </div>
+                <span className="font-anonymous font-bold text-lg text-white block leading-snug">
+                  {m.role}
+                </span>
+                <span className="font-mono-tech text-[11px] uppercase tracking-wider text-[#de5cff] block mt-2">
+                  {m.focus}
+                </span>
+                {m.detail && (
+                  <p className="font-mono-tech text-xs text-zinc-400 leading-relaxed mt-3">
+                    {m.detail}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+          <p className="font-mono-tech text-[11px] text-zinc-600 mt-6">
+            Team members are listed by role for now — names and bios will be
+            added as they&apos;re confirmed.
+          </p>
         </div>
       </section>
 
