@@ -144,6 +144,9 @@ export default function ZeroDaySecurityPage() {
             <a href="#team" className="hover:text-[#de5cff] transition">
               Team
             </a>
+            <a href="#pricing" className="hover:text-[#de5cff] transition">
+              Pricing
+            </a>
             <a href="#contact" className="hover:text-[#de5cff] transition">
               Contact
             </a>
@@ -634,6 +637,105 @@ export default function ZeroDaySecurityPage() {
         </div>
       </section>
 
+      {/* ===================== PRICING ===================== */}
+      <section
+        id="pricing"
+        className="bg-[#050505] border-t border-zinc-900 py-24"
+      >
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+          <div className="text-center mb-12">
+            <span className="font-mono-tech text-[11px] uppercase tracking-[0.25em] text-[#de5cff]">
+              / Pricing
+            </span>
+            <h2 className="font-anonymous font-bold text-3xl md:text-5xl text-white mt-4">
+              Fixed scope. Fixed price.
+            </h2>
+            <p className="font-mono-tech text-zinc-400 text-sm md:text-base mt-4 max-w-2xl mx-auto">
+              We don&apos;t bill by the hour. Every engagement is a defined
+              project with agreed deliverables and one price that holds — no
+              meters running in the background.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {[
+              {
+                title: "Per-project, not per-hour",
+                body: "You approve a written scope and a fixed price before work starts. The number only moves if the scope does.",
+                iconKey: "FileText",
+              },
+              {
+                title: "Scoped on request",
+                body: "Describe your environment in plain terms and we return a scope and a fixed quote sized to it — no obligation.",
+                iconKey: "Target",
+              },
+              {
+                title: "Scoping is free",
+                body: "The scoping conversation and the quote cost nothing. You pay only for work you have approved.",
+                iconKey: "ShieldCheck",
+              },
+              {
+                title: "Retainers, same discipline",
+                body: "Managed security and recurring assessments run as fixed monthly or quarterly packages — predictability on a schedule.",
+                iconKey: "Radar",
+              },
+            ].map((p) => (
+              <div
+                key={p.title}
+                className="rounded-[6px] p-6 bg-[#0f0f0f] border border-zinc-800 h-full"
+              >
+                <div className="p-2.5 rounded-lg bg-[#de5cff]/10 border border-[#de5cff]/30 text-[#de5cff] w-max mb-4">
+                  <Icon name={p.iconKey} className="w-6 h-6" />
+                </div>
+                <span className="font-anonymous font-bold text-lg text-white block leading-snug">
+                  {p.title}
+                </span>
+                <p className="font-mono-tech text-xs text-zinc-400 leading-relaxed mt-3">
+                  {p.body}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Reference scopes */}
+          <div className="rounded-lg border border-zinc-800 bg-[#0d0d0d] p-6 md:p-7">
+            <span className="font-mono-tech text-[10px] uppercase tracking-wider text-zinc-500 block mb-4">
+              Reference scopes — how to describe yours
+            </span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 font-mono-tech text-xs md:text-sm">
+              {[
+                ["Internal VAPT", "“1 server + 160 desktops”"],
+                [
+                  "Application testing",
+                  "“one web application and its APIs”",
+                ],
+                [
+                  "Red team exercise",
+                  "“one objective: reach and exfiltrate a marked file”",
+                ],
+                [
+                  "Compliance readiness",
+                  "“one certification: ISO 27001, first audit”",
+                ],
+              ].map(([k, v]) => (
+                <div
+                  key={k}
+                  className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 border-b border-zinc-800/60 pb-3"
+                >
+                  <span className="text-zinc-500 shrink-0 sm:w-48">{k}</span>
+                  <span className="text-[#de5cff]">{v}</span>
+                </div>
+              ))}
+            </div>
+            <p className="font-mono-tech text-[11px] text-zinc-500 mt-4">
+              A size description like these is all we need to start — send it
+              through the form below and we&apos;ll come back with a scope and
+              a fixed price.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* ===================== CONTACT / SCOPING ===================== */}
       <section
         id="contact"
@@ -649,9 +751,9 @@ export default function ZeroDaySecurityPage() {
               Tell us what needs testing.
             </h2>
             <p className="font-mono-tech text-sm md:text-base text-zinc-400 leading-relaxed">
-              Send the form with whatever scope details you have — rough is
-              fine. We&apos;ll come back with clarifying questions and a
-              proposal. No sales calls, no obligation.
+              A single line like &ldquo;1 server + 160 desktops&rdquo; is
+              enough to start. We&apos;ll come back with clarifying questions
+              and a fixed-price quote. No sales calls, no obligation.
             </p>
 
             <div className="p-6 rounded-lg bg-[#111] border border-zinc-800 space-y-4">
@@ -816,9 +918,9 @@ export default function ZeroDaySecurityPage() {
                     className="w-full px-4 py-2.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:outline-none focus:border-[#de5cff]"
                   >
                     <option>One-time Assessment</option>
-                    <option>Periodic Retainer</option>
-                    <option>Ongoing vCISO Support</option>
-                    <option>Managed Security Services</option>
+                    <option>Recurring Assessment Cycle</option>
+                    <option>Managed Security Retainer</option>
+                    <option>Not sure yet — advise me</option>
                   </select>
                 </div>
                 <div>
@@ -916,10 +1018,11 @@ export default function ZeroDaySecurityPage() {
 
             <div className="md:col-span-4">
               <h4 className="font-anonymous font-bold text-2xl uppercase tracking-[-0.02em] text-[#c000f0] mb-3">
-                Get a quote
+                Free scoping & quote
               </h4>
               <p className="font-mono-tech text-zinc-400 text-sm mb-5">
-                Contact us for free scoping and a quote.
+                Every project starts with a free scoping conversation and a
+                fixed-price quote — no hourly billing.
               </p>
               <div className="space-y-2">
                 <a

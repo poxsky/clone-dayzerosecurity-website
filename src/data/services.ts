@@ -531,9 +531,9 @@ export const WHY_US = [
     iconKey: "FileText",
   },
   {
-    strength: "Engagements shaped around you",
+    strength: "Fixed scope, fixed price",
     meaning:
-      "A one-time assessment, a recurring cycle or a year-round retainer — the structure follows your risk and your budget, not our convenience.",
+      "Every engagement is quoted as a project with the scope agreed in writing — and the price doesn't move unless the scope does. No hourly billing.",
     iconKey: "Handshake",
   },
 ];
