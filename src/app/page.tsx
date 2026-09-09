@@ -184,7 +184,7 @@ export default function ZeroDaySecurityPage() {
             href="#top"
             className="font-anonymous font-bold text-2xl md:text-3xl tracking-tight hover:opacity-90 transition"
           >
-            <span className="text-[#de5cff]">0day</span> Security
+            <span className="text-[#de5cff]">0DAY</span> Research Team
           </a>
 
           <nav className="hidden lg:flex items-center gap-7 font-mono-tech text-[13px] uppercase tracking-wider text-zinc-300">
@@ -294,7 +294,7 @@ export default function ZeroDaySecurityPage() {
           <div className="lg:col-span-7 space-y-6">
             <p className="font-mono-tech text-zinc-300 text-base md:text-lg leading-relaxed">
               <span className="text-white font-semibold">
-                0day Security Team
+                0DAY Research Team
               </span>{" "}
               is a security research and testing group built around a core team
               with hands-on offensive security experience — including multiple
@@ -537,7 +537,7 @@ export default function ZeroDaySecurityPage() {
               / Why Us
             </span>
             <h2 className="font-anonymous font-bold text-3xl md:text-5xl text-white mt-4">
-              Why 0day Security
+              Why 0DAY Research Team
             </h2>
           </div>
 
@@ -605,20 +605,20 @@ export default function ZeroDaySecurityPage() {
                   <Phone className="w-4 h-4 text-[#de5cff]" /> +91 7309435990
                 </a>
                 <a
-                  href="mailto:contact@anmol.reseracher.com?subject=0day Security - Enquiry"
+                  href="mailto:anmol@0daysecurity.tech?subject=0DAY%20Research%20Team%20Enquiry"
                   className="flex items-center gap-3 text-zinc-300 hover:text-[#de5cff] transition break-all"
                 >
                   <Mail className="w-4 h-4 text-[#de5cff] shrink-0" />
-                  contact@anmol.reseracher.com
+                  anmol@0daysecurity.tech
                 </a>
                 <a
-                  href="https://anmol.reseracher.com"
+                  href="https://0daysecurity.tech"
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center gap-3 text-zinc-300 hover:text-[#de5cff] transition"
                 >
                   <GlobeIcon className="w-4 h-4 text-[#de5cff]" />
-                  anmol.reseracher.com
+                  0daysecurity.tech
                 </a>
               </div>
             </div>
@@ -904,18 +904,18 @@ export default function ZeroDaySecurityPage() {
                   +91 7309435990
                 </a>
                 <a
-                  href="mailto:contact@anmol.reseracher.com?subject=0day Security - Enquiry"
+                  href="mailto:anmol@0daysecurity.tech?subject=0DAY%20Research%20Team%20Enquiry"
                   className="block font-mono-tech font-light text-base md:text-lg text-white hover:text-[#de5cff] transition break-all"
                 >
-                  contact@anmol.reseracher.com
+                  anmol@0daysecurity.tech
                 </a>
                 <a
-                  href="https://anmol.reseracher.com"
+                  href="https://0daysecurity.tech"
                   target="_blank"
                   rel="noreferrer"
                   className="block font-mono-tech text-sm text-zinc-400 hover:text-[#de5cff] transition"
                 >
-                  anmol.reseracher.com
+                  0daysecurity.tech
                 </a>
               </div>
             </div>
@@ -923,7 +923,7 @@ export default function ZeroDaySecurityPage() {
 
           <div className="pt-8 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="font-anonymous text-zinc-500 text-sm">
-              &copy; 2026 0day Security. All rights reserved.
+              &copy; 2026 0DAY Research Team. All rights reserved.
             </p>
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
