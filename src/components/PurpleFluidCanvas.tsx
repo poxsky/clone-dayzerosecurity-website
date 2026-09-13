@@ -13,6 +13,15 @@ interface ParticleSplat {
   decay: number;
 }
 
+/*
+ * Ambient hero background — tuned to stay *barely there*:
+ * low-alpha, large, slow washes instead of bright plumes.
+ */
+const SPLAT_ALPHA_BASE = 0.1;
+const MAX_SPLATS = 36;
+const AMBIENT_INTERVAL_MS = 5200;
+const DPR_CAP = 1.5;
+
 export default function PurpleFluidCanvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -22,9 +31,11 @@ export default function PurpleFluidCanvas() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationFrameId: number;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    let animationFrameId = 0;
+    let ambientTimer: ReturnType<typeof setInterval> | undefined;
+    let width = 0;
+    let height = 0;
+    const dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP);
 
     const splats: ParticleSplat[] = [];
 
@@ -35,85 +46,131 @@ export default function PurpleFluidCanvas() {
       vy: number,
       radiusScale = 1
     ) => {
-      const count = 3;
+      const count = 2;
       for (let i = 0; i < count; i++) {
         splats.push({
-          x: x + (Math.random() - 0.5) * 30,
-          y: y + (Math.random() - 0.5) * 30,
-          vx: vx * (0.4 + Math.random() * 0.8) + (Math.random() - 0.5) * 1.5,
-          vy: vy * (0.4 + Math.random() * 0.8) + (Math.random() - 0.5) * 1.5,
-          radius: (90 + Math.random() * 140) * radiusScale,
-          alpha: 0.35 + Math.random() * 0.25,
-          hue: 282 + Math.random() * 16, // Electric purple #DE5CFF to #C000F0
-          decay: 0.003 + Math.random() * 0.004,
+          x: x + (Math.random() - 0.5) * 40,
+          y: y + (Math.random() - 0.5) * 40,
+          vx: vx * (0.25 + Math.random() * 0.5) + (Math.random() - 0.5) * 0.8,
+          vy: vy * (0.25 + Math.random() * 0.5) + (Math.random() - 0.5) * 0.8,
+          radius: (120 + Math.random() * 160) * radiusScale,
+          alpha: SPLAT_ALPHA_BASE + Math.random() * 0.08,
+          hue: 282 + Math.random() * 16,
+          decay: 0.006 + Math.random() * 0.006,
         });
       }
-      if (splats.length > 85) {
-        splats.splice(0, splats.length - 85);
+      if (splats.length > MAX_SPLATS) {
+        splats.splice(0, splats.length - MAX_SPLATS);
       }
     };
 
-    // Initial ambient splats so screen starts with purple fluid plumes
-    for (let i = 0; i < 8; i++) {
-      addSplat(
-        width * (0.25 + Math.random() * 0.5),
-        height * (0.25 + Math.random() * 0.5),
-        (Math.random() - 0.5) * 6,
-        (Math.random() - 0.5) * 6,
-        1.2
+    const paintSplat = (s: ParticleSplat) => {
+      const grad = ctx.createRadialGradient(
+        s.x,
+        s.y,
+        s.radius * 0.05,
+        s.x,
+        s.y,
+        s.radius
       );
+      grad.addColorStop(0, `hsla(${s.hue}, 95%, 62%, ${s.alpha})`);
+      grad.addColorStop(0.45, `hsla(${s.hue - 6}, 90%, 44%, ${s.alpha * 0.5})`);
+      grad.addColorStop(1, `hsla(${s.hue - 12}, 85%, 18%, 0)`);
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      ctx.fill();
+    };
+
+    const resize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+
+    const seedAmbient = (n: number, scale: number) => {
+      for (let i = 0; i < n; i++) {
+        addSplat(
+          width * (0.25 + Math.random() * 0.5),
+          height * (0.25 + Math.random() * 0.5),
+          (Math.random() - 0.5) * 4,
+          (Math.random() - 0.5) * 4,
+          scale
+        );
+      }
+    };
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reducedMotion) {
+      // Static, gentle wash — no animation loop, no listeners.
+      seedAmbient(6, 1.4);
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(0, 0, width, height);
+      ctx.globalCompositeOperation = "screen";
+      for (const s of splats) paintSplat(s);
+      ctx.globalCompositeOperation = "source-over";
+      return;
     }
 
     let lastMouseX = width / 2;
     let lastMouseY = height / 2;
+    let lastSplatX = -1e9;
+    let lastSplatY = -1e9;
+
+    const pointerSplat = (x: number, y: number) => {
+      // only react to deliberate movement, not every pixel
+      const dx = x - lastSplatX;
+      const dy = y - lastSplatY;
+      if (dx * dx + dy * dy < 22 * 22) return;
+      const vx = (x - lastMouseX) * 0.16;
+      const vy = (y - lastMouseY) * 0.16;
+      lastMouseX = x;
+      lastMouseY = y;
+      lastSplatX = x;
+      lastSplatY = y;
+      addSplat(x, y, vx, vy, 0.75);
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const vx = (x - lastMouseX) * 0.35;
-      const vy = (y - lastMouseY) * 0.35;
-      lastMouseX = x;
-      lastMouseY = y;
-      addSplat(x, y, vx, vy, 0.9);
+      pointerSplat(e.clientX - rect.left, e.clientY - rect.top);
     };
 
     const handleTouchMove = (e: TouchEvent) => {
       if (e.touches.length > 0) {
         const touch = e.touches[0];
         const rect = canvas.getBoundingClientRect();
-        const x = touch.clientX - rect.left;
-        const y = touch.clientY - rect.top;
-        const vx = (x - lastMouseX) * 0.35;
-        const vy = (y - lastMouseY) * 0.35;
-        lastMouseX = x;
-        lastMouseY = y;
-        addSplat(x, y, vx, vy, 0.9);
+        pointerSplat(touch.clientX - rect.left, touch.clientY - rect.top);
       }
     };
 
-    const handleResize = () => {
-      if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
+    const handleResize = () => resize();
 
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("touchmove", handleTouchMove, { passive: true });
     window.addEventListener("resize", handleResize);
 
-    // Periodic ambient purple splat generator
-    const ambientInterval = setInterval(() => {
-      const rx = width * (0.15 + Math.random() * 0.7);
-      const ry = height * (0.2 + Math.random() * 0.6);
-      const rvx = (Math.random() - 0.5) * 8;
-      const rvy = (Math.random() - 0.5) * 8;
-      addSplat(rx, ry, rvx, rvy, 1.15);
-    }, 2200);
+    seedAmbient(6, 1.3);
+
+    ambientTimer = setInterval(() => {
+      addSplat(
+        width * (0.15 + Math.random() * 0.7),
+        height * (0.2 + Math.random() * 0.6),
+        (Math.random() - 0.5) * 5,
+        (Math.random() - 0.5) * 5,
+        1.35
+      );
+    }, AMBIENT_INTERVAL_MS);
 
     const render = () => {
-      // Soft dark fade trail for fluid dissipation feel
-      ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+      // soft dark fade trail for fluid dissipation feel
+      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
       ctx.fillRect(0, 0, width, height);
 
       ctx.globalCompositeOperation = "screen";
@@ -122,9 +179,9 @@ export default function PurpleFluidCanvas() {
         const s = splats[i];
         s.x += s.vx;
         s.y += s.vy;
-        s.vx *= 0.96; // velocity dissipation
-        s.vy *= 0.96;
-        s.radius *= 1.004; // slight expansion like dye dispersion
+        s.vx *= 0.965; // velocity dissipation
+        s.vy *= 0.965;
+        s.radius *= 1.003; // slow dye dispersion
         s.alpha -= s.decay;
 
         if (s.alpha <= 0.008) {
@@ -132,22 +189,7 @@ export default function PurpleFluidCanvas() {
           continue;
         }
 
-        const grad = ctx.createRadialGradient(
-          s.x,
-          s.y,
-          s.radius * 0.05,
-          s.x,
-          s.y,
-          s.radius
-        );
-        grad.addColorStop(0, `hsla(${s.hue}, 100%, 68%, ${s.alpha})`);
-        grad.addColorStop(0.45, `hsla(${s.hue - 6}, 95%, 48%, ${s.alpha * 0.6})`);
-        grad.addColorStop(1, `hsla(${s.hue - 12}, 90%, 20%, 0)`);
-
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        ctx.fill();
+        paintSplat(s);
       }
 
       ctx.globalCompositeOperation = "source-over";
@@ -158,7 +200,7 @@ export default function PurpleFluidCanvas() {
 
     return () => {
       cancelAnimationFrame(animationFrameId);
-      clearInterval(ambientInterval);
+      if (ambientTimer) clearInterval(ambientTimer);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("resize", handleResize);

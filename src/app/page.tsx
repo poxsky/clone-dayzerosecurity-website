@@ -193,12 +193,12 @@ export default function ZeroDaySecurityPage() {
       {/* scroll progress */}
       <div
         aria-hidden
-        className="fixed top-0 left-0 z-[60] h-[2px] bg-gradient-to-r from-[#c000f0] to-[#de5cff] shadow-[0_0_10px_rgba(222,92,255,0.8)]"
+        className="fixed top-0 left-0 z-[60] h-[2px] bg-gradient-to-r from-[#c000f0] to-[#de5cff] shadow-[0_0_10px_rgba(222,92,255,0.8)] transition-[width] duration-150 ease-out"
         style={{ width: `${scrollProgress * 100}%` }}
       />
 
       {/* ===================== HEADER ===================== */}
-      <header className="fixed top-0 inset-x-0 z-50 bg-black/85 backdrop-blur-md border-b border-white/5">
+      <header className="fixed top-0 inset-x-0 z-50 bg-black/85 backdrop-blur-md border-b border-zinc-900">
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 h-20 flex items-center justify-between gap-4">
           <a
             href="#top"
@@ -208,29 +208,29 @@ export default function ZeroDaySecurityPage() {
           </a>
 
           <nav className="hidden lg:flex items-center gap-7 font-mono-tech text-[13px] uppercase tracking-wider text-zinc-300">
-            <a href="#about" className="hover:text-[#de5cff] transition">
+            <a href="#about" className="relative hover:text-[#de5cff] transition after:absolute after:left-0 after:-bottom-1.5 after:h-px after:w-0 after:bg-[#de5cff]/70 after:transition-all after:duration-300 hover:after:w-full">
               Who We Are
             </a>
-            <a href="#services" className="hover:text-[#de5cff] transition">
+            <a href="#services" className="relative hover:text-[#de5cff] transition after:absolute after:left-0 after:-bottom-1.5 after:h-px after:w-0 after:bg-[#de5cff]/70 after:transition-all after:duration-300 hover:after:w-full">
               Services
             </a>
-            <a href="#why" className="hover:text-[#de5cff] transition">
+            <a href="#why" className="relative hover:text-[#de5cff] transition after:absolute after:left-0 after:-bottom-1.5 after:h-px after:w-0 after:bg-[#de5cff]/70 after:transition-all after:duration-300 hover:after:w-full">
               Why Us
             </a>
-            <a href="#team" className="hover:text-[#de5cff] transition">
+            <a href="#team" className="relative hover:text-[#de5cff] transition after:absolute after:left-0 after:-bottom-1.5 after:h-px after:w-0 after:bg-[#de5cff]/70 after:transition-all after:duration-300 hover:after:w-full">
               Team
             </a>
-            <a href="#pricing" className="hover:text-[#de5cff] transition">
+            <a href="#pricing" className="relative hover:text-[#de5cff] transition after:absolute after:left-0 after:-bottom-1.5 after:h-px after:w-0 after:bg-[#de5cff]/70 after:transition-all after:duration-300 hover:after:w-full">
               Pricing
             </a>
-            <a href="#contact" className="hover:text-[#de5cff] transition">
+            <a href="#contact" className="relative hover:text-[#de5cff] transition after:absolute after:left-0 after:-bottom-1.5 after:h-px after:w-0 after:bg-[#de5cff]/70 after:transition-all after:duration-300 hover:after:w-full">
               Contact
             </a>
           </nav>
 
           <a
             href="#contact"
-            className="font-mono-tech text-[11px] md:text-xs uppercase tracking-wider px-5 py-2.5 border-2 border-[#c000f0] rounded-[3px] hover:bg-[#c000f0] transition shadow-[0_0_15px_rgba(192,0,240,0.3)]"
+            className="font-mono-tech text-[11px] md:text-xs uppercase tracking-wider px-5 py-2.5 border-2 border-[#c000f0] rounded-[3px] hover:bg-[#c000f0] active:scale-[0.97] transition shadow-[0_0_15px_rgba(192,0,240,0.3)]"
           >
             Get a Quote
           </a>
@@ -243,6 +243,16 @@ export default function ZeroDaySecurityPage() {
         className="relative w-full min-h-screen flex items-center overflow-hidden bg-black"
       >
         <PurpleFluidCanvas />
+
+        {/* vignette: keeps the fluid wash subtle at the edges, blends hero into the page */}
+        <div
+          aria-hidden
+          className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.5)_100%)]"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 z-[1] h-36 pointer-events-none bg-gradient-to-b from-transparent to-black"
+        />
 
         <div className="relative z-10 max-w-[1400px] w-full mx-auto px-6 md:px-10 pt-28 pb-20">
           <div className="pointer-events-none">
@@ -285,13 +295,13 @@ export default function ZeroDaySecurityPage() {
           >
             <a
               href="#services"
-              className="px-7 py-3.5 bg-[#de5cff] hover:bg-[#c000f0] text-black hover:text-white font-mono-tech font-medium text-sm uppercase tracking-wider rounded-[3px] transition shadow-[0_0_25px_rgba(222,92,255,0.35)] animate-glow-pulse"
+              className="px-7 py-3.5 bg-[#de5cff] hover:bg-[#c000f0] text-black hover:text-white font-mono-tech font-medium text-sm uppercase tracking-wider rounded-[3px] active:scale-[0.97] transition shadow-[0_0_25px_rgba(222,92,255,0.35)] animate-glow-pulse"
             >
               Explore Services
             </a>
             <a
               href="#contact"
-              className="px-7 py-3.5 bg-black/60 hover:bg-zinc-900 text-white border border-white/25 hover:border-[#de5cff] font-mono-tech text-sm uppercase tracking-wider rounded-[3px] transition"
+              className="px-7 py-3.5 bg-black/60 hover:bg-zinc-900 text-white border border-white/25 hover:border-[#de5cff] font-mono-tech text-sm uppercase tracking-wider rounded-[3px] active:scale-[0.97] transition"
             >
               Free Scoping & Quote
             </a>
@@ -318,8 +328,8 @@ export default function ZeroDaySecurityPage() {
       {/* ===================== WHO WE ARE ===================== */}
       <section
         id="about"
-        className="bg-[#050505] border-t border-zinc-900 py-24"
-      >
+        className="relative bg-[#050505] border-t border-zinc-900 py-24">
+        <div aria-hidden className="section-glow-line" />
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-14 items-start">
           <Reveal className="lg:col-span-5">
             <span className="font-mono-tech text-[11px] uppercase tracking-[0.25em] text-[#de5cff]">
@@ -382,8 +392,8 @@ export default function ZeroDaySecurityPage() {
       {/* ===================== CORE SERVICES ===================== */}
       <section
         id="services"
-        className="bg-black border-t border-zinc-900 py-24"
-      >
+        className="relative bg-black border-t border-zinc-900 py-24">
+        <div aria-hidden className="section-glow-line" />
         <div className="max-w-[1400px] mx-auto px-6 md:px-10">
           <Reveal className="text-center mb-12">
             <span className="font-mono-tech text-[11px] uppercase tracking-[0.25em] text-[#de5cff]">
@@ -582,7 +592,8 @@ export default function ZeroDaySecurityPage() {
       </section>
 
       {/* ===================== WHY 0DAY SECURITY ===================== */}
-      <section id="why" className="bg-[#050505] border-t border-zinc-900 py-24">
+      <section id="why" className="relative bg-[#050505] border-t border-zinc-900 py-24">
+        <div aria-hidden className="section-glow-line" />
         <div className="max-w-[1400px] mx-auto px-6 md:px-10">
           <div className="mb-12">
             <span className="font-mono-tech text-[11px] uppercase tracking-[0.25em] text-[#de5cff]">
@@ -627,7 +638,8 @@ export default function ZeroDaySecurityPage() {
       </section>
 
       {/* ===================== TEAM ===================== */}
-      <section id="team" className="bg-black border-t border-zinc-900 py-24">
+      <section id="team" className="relative bg-black border-t border-zinc-900 py-24">
+        <div aria-hidden className="section-glow-line" />
         <div className="max-w-[1400px] mx-auto px-6 md:px-10">
           <div className="mb-12 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <div>
@@ -738,8 +750,8 @@ export default function ZeroDaySecurityPage() {
       {/* ===================== PRICING ===================== */}
       <section
         id="pricing"
-        className="bg-[#050505] border-t border-zinc-900 py-24"
-      >
+        className="relative bg-[#050505] border-t border-zinc-900 py-24">
+        <div aria-hidden className="section-glow-line" />
         <div className="max-w-[1400px] mx-auto px-6 md:px-10">
           <Reveal className="text-center mb-12">
             <span className="font-mono-tech text-[11px] uppercase tracking-[0.25em] text-[#de5cff]">
@@ -838,8 +850,8 @@ export default function ZeroDaySecurityPage() {
       {/* ===================== CONTACT / SCOPING ===================== */}
       <section
         id="contact"
-        className="bg-[#0a0a0a] border-t border-zinc-900 py-24"
-      >
+        className="relative bg-[#0a0a0a] border-t border-zinc-900 py-24">
+        <div aria-hidden className="section-glow-line" />
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left */}
           <Reveal className="lg:col-span-5 space-y-6">
@@ -953,7 +965,7 @@ export default function ZeroDaySecurityPage() {
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
                       placeholder="Company name"
-                      className="w-full pl-10 pr-4 py-2.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:outline-none focus:border-[#de5cff]"
+                      className="w-full pl-10 pr-4 py-2.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:border-[#de5cff]"
                     />
                   </div>
                 </div>
@@ -968,7 +980,7 @@ export default function ZeroDaySecurityPage() {
                       value={contactName}
                       onChange={(e) => setContactName(e.target.value)}
                       placeholder="Your name (role) — e.g. IT Head"
-                      className="w-full pl-10 pr-4 py-2.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:outline-none focus:border-[#de5cff]"
+                      className="w-full pl-10 pr-4 py-2.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:border-[#de5cff]"
                     />
                   </div>
                 </div>
@@ -987,7 +999,7 @@ export default function ZeroDaySecurityPage() {
                       value={contactEmail}
                       onChange={(e) => setContactEmail(e.target.value)}
                       placeholder="you@company.com"
-                      className="w-full pl-10 pr-4 py-2.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:outline-none focus:border-[#de5cff]"
+                      className="w-full pl-10 pr-4 py-2.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:border-[#de5cff]"
                     />
                   </div>
                 </div>
@@ -1001,7 +1013,7 @@ export default function ZeroDaySecurityPage() {
                       value={contactPhone}
                       onChange={(e) => setContactPhone(e.target.value)}
                       placeholder="+91 XXXXX XXXXX"
-                      className="w-full pl-10 pr-4 py-2.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:outline-none focus:border-[#de5cff]"
+                      className="w-full pl-10 pr-4 py-2.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:border-[#de5cff]"
                     />
                   </div>
                 </div>
@@ -1015,7 +1027,7 @@ export default function ZeroDaySecurityPage() {
                   <select
                     value={engagementModel}
                     onChange={(e) => setEngagementModel(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:outline-none focus:border-[#de5cff]"
+                    className="w-full px-4 py-2.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:border-[#de5cff]"
                   >
                     <option>One-time Assessment</option>
                     <option>Recurring Assessment Cycle</option>
@@ -1030,7 +1042,7 @@ export default function ZeroDaySecurityPage() {
                   <select
                     value={estimatedTimeline}
                     onChange={(e) => setEstimatedTimeline(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:outline-none focus:border-[#de5cff]"
+                    className="w-full px-4 py-2.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:border-[#de5cff]"
                   >
                     <option>Immediate (within 2 weeks)</option>
                     <option>2-4 Weeks</option>
@@ -1049,7 +1061,7 @@ export default function ZeroDaySecurityPage() {
                   value={objectives}
                   onChange={(e) => setObjectives(e.target.value)}
                   placeholder="What's in scope — apps, IP ranges, cloud accounts, environment size, compliance deadlines..."
-                  className="w-full p-3.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:outline-none focus:border-[#de5cff]"
+                  className="w-full p-3.5 bg-zinc-900/90 border border-zinc-700 rounded text-sm font-mono-tech text-white focus:border-[#de5cff]"
                 />
               </div>
 
@@ -1069,7 +1081,7 @@ export default function ZeroDaySecurityPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-8 py-3.5 bg-[#de5cff] hover:bg-[#c000f0] text-black hover:text-white font-mono-tech font-semibold text-sm uppercase tracking-wider rounded-[3px] transition cursor-pointer flex items-center gap-2 disabled:opacity-60 shadow-[0_0_20px_rgba(222,92,255,0.3)]"
+                  className="px-8 py-3.5 bg-[#de5cff] hover:bg-[#c000f0] text-black hover:text-white font-mono-tech font-semibold text-sm uppercase tracking-wider rounded-[3px] active:scale-[0.98] transition cursor-pointer flex items-center gap-2 disabled:opacity-60 shadow-[0_0_20px_rgba(222,92,255,0.3)]"
                 >
                   <Send className="w-4 h-4" />
                   {submitting ? "Sending..." : "Send Request"}
@@ -1093,7 +1105,8 @@ export default function ZeroDaySecurityPage() {
       </section>
 
       {/* ===================== FOOTER ===================== */}
-      <footer className="bg-black border-t border-zinc-900 pt-20 pb-10">
+      <footer className="relative bg-black border-t border-zinc-900 pt-20 pb-10">
+        <div aria-hidden className="section-glow-line" />
         <div className="max-w-[1400px] mx-auto px-6 md:px-10">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-14">
             <div className="md:col-span-5">

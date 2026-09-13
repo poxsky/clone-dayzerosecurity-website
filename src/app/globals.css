@@ -5,6 +5,9 @@
     background-color: #000000;
     color: #ffffff;
     font-family: var(--font-roboto-mono), monospace;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1,
@@ -12,7 +15,30 @@
   h3,
   .font-logo {
     font-family: var(--font-anonymous-pro), monospace;
+    text-wrap: balance;
   }
+
+  /* visible keyboard focus everywhere (inputs add their own border tint) */
+  :focus-visible {
+    outline: 2px solid rgba(222, 92, 255, 0.6);
+    outline-offset: 2px;
+  }
+}
+
+/* hairline gradient separator at the top of major sections */
+.section-glow-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(222, 92, 255, 0.22),
+    transparent
+  );
+  pointer-events: none;
 }
 
 .font-anonymous {
