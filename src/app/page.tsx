@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import PurpleFluidCanvas from "@/components/PurpleFluidCanvas";
 import Icon from "@/components/Icon";
+import Reveal from "@/components/Reveal";
 import {
   SERVICE_CATALOG,
   SERVICE_CATEGORIES,
@@ -36,6 +37,61 @@ const STATS = [
   { value: "Expert", label: "pwn.college Player" },
 ];
 
+/**
+ * Animated stat value — counts numeric values ("10+", "Top 20") up from
+ * zero when scrolled into view. Non-numeric values ("Expert") stay static.
+ * Respects prefers-reduced-motion.
+ */
+function StatValue({
+  value,
+  startDelay = 0,
+}: {
+  value: string;
+  startDelay?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [display, setDisplay] = useState(value);
+
+  useEffect(() => {
+    const match = value.match(/^([^\d]*)(\d+)([\s\S]*)$/);
+    if (!match) return; // non-numeric — render as-is
+
+    const [, prefix, digits, suffix] = match;
+    const target = parseInt(digits, 10);
+    const el = ref.current;
+    if (!el) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let raf = 0;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        observer.disconnect();
+
+        const duration = 1400;
+        const startAt = performance.now() + startDelay;
+        const tick = (now: number) => {
+          const p = Math.min(Math.max((now - startAt) / duration, 0), 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          setDisplay(`${prefix}${Math.round(eased * target)}${suffix}`);
+          if (p < 1) raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [value, startDelay]);
+
+  return <span ref={ref}>{display}</span>;
+}
+
 export default function ZeroDaySecurityPage() {
   const [activeCategory, setActiveCategory] = useState<CategoryId>("vapt");
   const [activeService, setActiveService] = useState<ServiceItem | null>(
@@ -58,6 +114,18 @@ export default function ZeroDaySecurityPage() {
     type: "success" | "error";
     text: string;
   } | null>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - doc.clientHeight;
+      setScrollProgress(max > 0 ? doc.scrollTop / max : 0);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const activeCategoryMeta =
     SERVICE_CATEGORIES.find((c) => c.id === activeCategory) ??
@@ -122,6 +190,13 @@ export default function ZeroDaySecurityPage() {
 
   return (
     <div className="min-h-screen bg-black text-white selection:bg-[#de5cff] selection:text-black">
+      {/* scroll progress */}
+      <div
+        aria-hidden
+        className="fixed top-0 left-0 z-[60] h-[2px] bg-gradient-to-r from-[#c000f0] to-[#de5cff] shadow-[0_0_10px_rgba(222,92,255,0.8)]"
+        style={{ width: `${scrollProgress * 100}%` }}
+      />
+
       {/* ===================== HEADER ===================== */}
       <header className="fixed top-0 inset-x-0 z-50 bg-black/85 backdrop-blur-md border-b border-white/5">
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 h-20 flex items-center justify-between gap-4">
@@ -171,20 +246,32 @@ export default function ZeroDaySecurityPage() {
 
         <div className="relative z-10 max-w-[1400px] w-full mx-auto px-6 md:px-10 pt-28 pb-20">
           <div className="pointer-events-none">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded border border-[#de5cff]/40 bg-[#de5cff]/10 text-[#de5cff] font-mono-tech text-[11px] uppercase tracking-[0.2em] mb-6">
+            <div
+              className="animate-fade-up inline-flex items-center gap-2 px-3 py-1 rounded border border-[#de5cff]/40 bg-[#de5cff]/10 text-[#de5cff] font-mono-tech text-[11px] uppercase tracking-[0.2em] mb-6"
+              style={{ animationDelay: "0.05s" }}
+            >
               <ShieldCheck className="w-3.5 h-3.5" /> Practitioner-led
               offensive security
             </div>
 
-            <h1 className="font-anonymous font-bold uppercase text-white text-5xl sm:text-7xl md:text-8xl lg:text-[6rem] leading-[1.02] tracking-[-0.03em] mb-5">
+            <h1
+              className="animate-fade-up font-anonymous font-bold uppercase text-white text-5xl sm:text-7xl md:text-8xl lg:text-[6rem] leading-[1.02] tracking-[-0.03em] mb-5"
+              style={{ animationDelay: "0.15s" }}
+            >
               We break in <br />
               before attackers do.
             </h1>
 
-            <p className="font-mono-tech text-white/70 font-light text-xl sm:text-2xl md:text-3xl tracking-[-0.02em] max-w-3xl mb-4">
+            <p
+              className="animate-fade-up font-mono-tech text-white/70 font-light text-xl sm:text-2xl md:text-3xl tracking-[-0.02em] max-w-3xl mb-4"
+              style={{ animationDelay: "0.3s" }}
+            >
               Offensive security, run by working researchers
             </p>
-            <p className="font-mono-tech text-zinc-400 text-sm md:text-base max-w-2xl leading-relaxed mb-10">
+            <p
+              className="animate-fade-up font-mono-tech text-zinc-400 text-sm md:text-base max-w-2xl leading-relaxed mb-10"
+              style={{ animationDelay: "0.42s" }}
+            >
               Penetration testing, red teaming and application security from a
               team with 10+ published CVEs and 100+ Hall of Fame
               recognitions. We attack your systems the way a real adversary
@@ -192,10 +279,13 @@ export default function ZeroDaySecurityPage() {
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 mb-16">
+          <div
+            className="animate-fade-up flex flex-wrap items-center gap-4 mb-16"
+            style={{ animationDelay: "0.55s" }}
+          >
             <a
               href="#services"
-              className="px-7 py-3.5 bg-[#de5cff] hover:bg-[#c000f0] text-black hover:text-white font-mono-tech font-medium text-sm uppercase tracking-wider rounded-[3px] transition shadow-[0_0_25px_rgba(222,92,255,0.35)]"
+              className="px-7 py-3.5 bg-[#de5cff] hover:bg-[#c000f0] text-black hover:text-white font-mono-tech font-medium text-sm uppercase tracking-wider rounded-[3px] transition shadow-[0_0_25px_rgba(222,92,255,0.35)] animate-glow-pulse"
             >
               Explore Services
             </a>
@@ -207,11 +297,14 @@ export default function ZeroDaySecurityPage() {
             </a>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10 rounded-lg overflow-hidden max-w-3xl">
+          <div
+            className="animate-fade-up grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10 rounded-lg overflow-hidden max-w-3xl"
+            style={{ animationDelay: "0.7s" }}
+          >
             {STATS.map((s) => (
               <div key={s.label} className="bg-black/70 backdrop-blur px-5 py-5">
                 <div className="font-anonymous font-bold text-2xl md:text-3xl text-[#de5cff]">
-                  {s.value}
+                  <StatValue value={s.value} startDelay={900} />
                 </div>
                 <div className="font-mono-tech text-[10px] md:text-[11px] uppercase tracking-wider text-zinc-400 mt-1">
                   {s.label}
@@ -228,16 +321,16 @@ export default function ZeroDaySecurityPage() {
         className="bg-[#050505] border-t border-zinc-900 py-24"
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-14 items-start">
-          <div className="lg:col-span-5">
+          <Reveal className="lg:col-span-5">
             <span className="font-mono-tech text-[11px] uppercase tracking-[0.25em] text-[#de5cff]">
               / Who We Are
             </span>
             <h2 className="font-anonymous font-bold text-3xl md:text-5xl text-white mt-4 leading-tight">
               Researchers first, consultants second.
             </h2>
-          </div>
+          </Reveal>
 
-          <div className="lg:col-span-7 space-y-6">
+          <Reveal className="lg:col-span-7 space-y-6" delay={120}>
             <p className="font-mono-tech text-zinc-300 text-base md:text-lg leading-relaxed">
               <span className="text-white font-semibold">
                 0DAY Research Team
@@ -269,21 +362,20 @@ export default function ZeroDaySecurityPage() {
                   k: "Action-oriented",
                   v: "Risk ranked by business impact, fixes written for engineers.",
                 },
-              ].map((b) => (
-                <div
-                  key={b.k}
-                  className="p-4 rounded-lg bg-[#111] border border-zinc-800"
-                >
-                  <div className="font-anonymous font-bold text-white text-lg">
-                    {b.k}
+              ].map((b, i) => (
+                <Reveal key={b.k} delay={200 + i * 120}>
+                  <div className="p-4 rounded-lg bg-[#111] border border-zinc-800 hover:border-[#de5cff]/40 transition h-full">
+                    <div className="font-anonymous font-bold text-white text-lg">
+                      {b.k}
+                    </div>
+                    <div className="font-mono-tech text-xs text-zinc-400 mt-1 leading-relaxed">
+                      {b.v}
+                    </div>
                   </div>
-                  <div className="font-mono-tech text-xs text-zinc-400 mt-1 leading-relaxed">
-                    {b.v}
-                  </div>
-                </div>
+                </Reveal>
               ))}
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -293,7 +385,7 @@ export default function ZeroDaySecurityPage() {
         className="bg-black border-t border-zinc-900 py-24"
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-          <div className="text-center mb-12">
+          <Reveal className="text-center mb-12">
             <span className="font-mono-tech text-[11px] uppercase tracking-[0.25em] text-[#de5cff]">
               / What We Do
             </span>
@@ -305,7 +397,7 @@ export default function ZeroDaySecurityPage() {
               year-round managed security — pick the work you need, skip the
               rest.
             </p>
-          </div>
+          </Reveal>
 
           {/* Category tabs */}
           <div className="border-b border-zinc-800 mb-14 overflow-x-auto">
@@ -340,29 +432,29 @@ export default function ZeroDaySecurityPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left: service cards */}
             <div className="lg:col-span-7">
-              <div className="mb-6">
+              <Reveal className="mb-6">
                 <h3 className="font-anonymous font-bold text-2xl md:text-3xl text-white">
                   {activeCategoryMeta.headline}
                 </h3>
                 <p className="font-mono-tech text-sm text-zinc-400 mt-2 max-w-2xl leading-relaxed">
                   {activeCategoryMeta.blurb}
                 </p>
-              </div>
+              </Reveal>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {categoryServices.map((item) => {
+                {categoryServices.map((item, i) => {
                   const inScope = selectedServices.includes(item.name);
                   const isActive = activeService?.id === item.id;
                   return (
-                    <div
-                      key={item.id}
-                      onClick={() => setActiveService(item)}
-                      className={`group cursor-pointer rounded-[6px] p-5 border transition-all ${
-                        isActive
-                          ? "bg-[#1a1a1a] border-[#de5cff] shadow-[0_0_25px_rgba(222,92,255,0.15)]"
-                          : "bg-[#0f0f0f] border-zinc-800 hover:bg-[#171717] hover:border-zinc-700"
-                      }`}
-                    >
+                    <Reveal key={item.id} delay={i * 70}>
+                      <div
+                        onClick={() => setActiveService(item)}
+                        className={`group cursor-pointer rounded-[6px] p-5 border transition-all h-full hover:-translate-y-0.5 ${
+                          isActive
+                            ? "bg-[#1a1a1a] border-[#de5cff] shadow-[0_0_25px_rgba(222,92,255,0.15)]"
+                            : "bg-[#0f0f0f] border-zinc-800 hover:bg-[#171717] hover:border-zinc-700"
+                        }`}
+                      >
                       <div
                         className={`mb-3 transition-colors ${
                           isActive
@@ -403,6 +495,7 @@ export default function ZeroDaySecurityPage() {
                         </button>
                       </div>
                     </div>
+                    </Reveal>
                   );
                 })}
               </div>
@@ -410,12 +503,13 @@ export default function ZeroDaySecurityPage() {
 
             {/* Right: category highlights + inspector */}
             <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-28">
-              {activeCategoryMeta.highlights.map((h) => (
-                <div key={h.title} className="flex items-start gap-4">
-                  <div className="mt-1 p-2.5 rounded-lg bg-[#de5cff]/10 border border-[#de5cff]/30 text-[#de5cff] shrink-0">
-                    <Icon name={h.iconKey} className="w-6 h-6" />
-                  </div>
-                  <div>
+              {activeCategoryMeta.highlights.map((h, i) => (
+                <Reveal key={h.title} delay={i * 120}>
+                  <div className="flex items-start gap-4">
+                    <div className="mt-1 p-2.5 rounded-lg bg-[#de5cff]/10 border border-[#de5cff]/30 text-[#de5cff] shrink-0">
+                      <Icon name={h.iconKey} className="w-6 h-6" />
+                    </div>
+                    <div>
                     <span className="font-anonymous font-bold text-lg text-white block mb-1.5">
                       {h.title}
                     </span>
@@ -424,6 +518,7 @@ export default function ZeroDaySecurityPage() {
                     </p>
                   </div>
                 </div>
+                </Reveal>
               ))}
 
               {activeService && (
@@ -507,8 +602,8 @@ export default function ZeroDaySecurityPage() {
             </div>
 
             {WHY_US.map((row, i) => (
+              <Reveal key={row.strength} delay={i * 80}>
               <div
-                key={row.strength}
                 className={`grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-0 hover:bg-[#111] transition ${
                   i !== WHY_US.length - 1 ? "border-b border-zinc-800" : ""
                 }`}
@@ -525,6 +620,7 @@ export default function ZeroDaySecurityPage() {
                   {row.meaning}
                 </div>
               </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -549,7 +645,8 @@ export default function ZeroDaySecurityPage() {
           </div>
 
           {/* Founder */}
-          <div className="rounded-lg border border-[#de5cff]/40 bg-gradient-to-br from-[#1a0b22] to-[#0d0d0d] p-6 md:p-9 mb-6 shadow-[0_0_25px_rgba(192,0,240,0.12)] grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <Reveal>
+          <div className="rounded-lg border border-[#de5cff]/40 bg-gradient-to-br from-[#1a0b22] to-[#0d0d0d] p-6 md:p-9 mb-6 shadow-[0_0_25px_rgba(192,0,240,0.12)] grid grid-cols-1 lg:grid-cols-12 gap-8 transition-shadow duration-500 hover:shadow-[0_0_45px_rgba(192,0,240,0.25)]">
             <div className="lg:col-span-4 space-y-4">
               <div className="p-2.5 rounded-lg bg-[#de5cff]/10 border border-[#de5cff]/30 text-[#de5cff] w-max">
                 <Icon name={FOUNDER.iconKey} className="w-7 h-7" />
@@ -599,36 +696,36 @@ export default function ZeroDaySecurityPage() {
               </ul>
             </div>
           </div>
+          </Reveal>
 
           {/* Role cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {TEAM_ROLES.map((m) => (
-              <div
-                key={m.id}
-                className="rounded-[6px] p-6 bg-[#0f0f0f] border border-zinc-800 hover:border-zinc-700 transition h-full"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="p-2.5 rounded-lg bg-[#de5cff]/10 border border-[#de5cff]/30 text-[#de5cff]">
-                    <Icon name={m.iconKey} className="w-6 h-6" />
+            {TEAM_ROLES.map((m, i) => (
+              <Reveal key={m.id} delay={i * 90} className="h-full">
+                <div className="rounded-[6px] p-6 bg-[#0f0f0f] border border-zinc-800 hover:border-[#de5cff]/40 hover:-translate-y-1 transition h-full group">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="p-2.5 rounded-lg bg-[#de5cff]/10 border border-[#de5cff]/30 text-[#de5cff] transition-transform duration-300 group-hover:scale-110">
+                      <Icon name={m.iconKey} className="w-6 h-6" />
+                    </div>
+                    {m.headcount ? (
+                      <span className="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-700 font-mono-tech text-[10px] text-[#de5cff]">
+                        ×{m.headcount}
+                      </span>
+                    ) : null}
                   </div>
-                  {m.headcount ? (
-                    <span className="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-700 font-mono-tech text-[10px] text-[#de5cff]">
-                      ×{m.headcount}
-                    </span>
-                  ) : null}
+                  <span className="font-anonymous font-bold text-lg text-white block leading-snug">
+                    {m.role}
+                  </span>
+                  <span className="font-mono-tech text-[11px] uppercase tracking-wider text-[#de5cff] block mt-2">
+                    {m.focus}
+                  </span>
+                  {m.detail && (
+                    <p className="font-mono-tech text-xs text-zinc-400 leading-relaxed mt-3">
+                      {m.detail}
+                    </p>
+                  )}
                 </div>
-                <span className="font-anonymous font-bold text-lg text-white block leading-snug">
-                  {m.role}
-                </span>
-                <span className="font-mono-tech text-[11px] uppercase tracking-wider text-[#de5cff] block mt-2">
-                  {m.focus}
-                </span>
-                {m.detail && (
-                  <p className="font-mono-tech text-xs text-zinc-400 leading-relaxed mt-3">
-                    {m.detail}
-                  </p>
-                )}
-              </div>
+              </Reveal>
             ))}
           </div>
           <p className="font-mono-tech text-[11px] text-zinc-600 mt-6">
@@ -644,7 +741,7 @@ export default function ZeroDaySecurityPage() {
         className="bg-[#050505] border-t border-zinc-900 py-24"
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-10">
-          <div className="text-center mb-12">
+          <Reveal className="text-center mb-12">
             <span className="font-mono-tech text-[11px] uppercase tracking-[0.25em] text-[#de5cff]">
               / Pricing
             </span>
@@ -656,7 +753,7 @@ export default function ZeroDaySecurityPage() {
               project with agreed deliverables and one price that holds — no
               meters running in the background.
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             {[
@@ -680,25 +777,25 @@ export default function ZeroDaySecurityPage() {
                 body: "Managed security and recurring assessments run as fixed monthly or quarterly packages — predictability on a schedule.",
                 iconKey: "Radar",
               },
-            ].map((p) => (
-              <div
-                key={p.title}
-                className="rounded-[6px] p-6 bg-[#0f0f0f] border border-zinc-800 h-full"
-              >
-                <div className="p-2.5 rounded-lg bg-[#de5cff]/10 border border-[#de5cff]/30 text-[#de5cff] w-max mb-4">
-                  <Icon name={p.iconKey} className="w-6 h-6" />
+            ].map((p, i) => (
+              <Reveal key={p.title} delay={i * 90} className="h-full">
+                <div className="rounded-[6px] p-6 bg-[#0f0f0f] border border-zinc-800 hover:border-[#de5cff]/40 hover:-translate-y-1 transition h-full group">
+                  <div className="p-2.5 rounded-lg bg-[#de5cff]/10 border border-[#de5cff]/30 text-[#de5cff] w-max mb-4 transition-transform duration-300 group-hover:scale-110">
+                    <Icon name={p.iconKey} className="w-6 h-6" />
+                  </div>
+                  <span className="font-anonymous font-bold text-lg text-white block leading-snug">
+                    {p.title}
+                  </span>
+                  <p className="font-mono-tech text-xs text-zinc-400 leading-relaxed mt-3">
+                    {p.body}
+                  </p>
                 </div>
-                <span className="font-anonymous font-bold text-lg text-white block leading-snug">
-                  {p.title}
-                </span>
-                <p className="font-mono-tech text-xs text-zinc-400 leading-relaxed mt-3">
-                  {p.body}
-                </p>
-              </div>
+              </Reveal>
             ))}
           </div>
 
           {/* Reference scopes */}
+          <Reveal delay={200}>
           <div className="rounded-lg border border-zinc-800 bg-[#0d0d0d] p-6 md:p-7">
             <span className="font-mono-tech text-[10px] uppercase tracking-wider text-zinc-500 block mb-4">
               Reference scopes — how to describe yours
@@ -734,6 +831,7 @@ export default function ZeroDaySecurityPage() {
               a fixed price.
             </p>
           </div>
+          </Reveal>
         </div>
       </section>
 
@@ -744,7 +842,7 @@ export default function ZeroDaySecurityPage() {
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left */}
-          <div className="lg:col-span-5 space-y-6">
+          <Reveal className="lg:col-span-5 space-y-6">
             <span className="font-mono-tech text-[11px] uppercase tracking-[0.25em] text-[#de5cff]">
               / Start a Project
             </span>
@@ -797,10 +895,11 @@ export default function ZeroDaySecurityPage() {
                 <li>A written scope and fixed price — no obligation.</li>
               </ol>
             </div>
-          </div>
+          </Reveal>
 
           {/* Right: form */}
-          <div className="lg:col-span-7 bg-[#111] border border-zinc-800 rounded-lg p-6 md:p-9">
+          <Reveal className="lg:col-span-7" delay={140}>
+          <div className="bg-[#111] border border-zinc-800 rounded-lg p-6 md:p-9">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
                 <h3 className="font-anonymous font-bold text-2xl text-white flex items-center gap-2">
@@ -989,6 +1088,7 @@ export default function ZeroDaySecurityPage() {
               </p>
             </form>
           </div>
+          </Reveal>
         </div>
       </section>
 
