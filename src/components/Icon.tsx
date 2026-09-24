@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import {
   Shield,
@@ -34,12 +33,16 @@ import {
   Terminal,
   FileText,
   Award,
+  Lock,
+  Zap,
+  Eye,
+  Activity,
+  Binary,
+  Braces,
+  Layers,
 } from "lucide-react";
 
-const ICONS: Record<
-  string,
-  React.ComponentType<{ className?: string; strokeWidth?: number }>
-> = {
+const ICONS: Record<string, React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
   Shield,
   ShieldCheck,
   ShieldAlert,
@@ -72,6 +75,13 @@ const ICONS: Record<
   Terminal,
   FileText,
   Award,
+  Lock,
+  Zap,
+  Eye,
+  Activity,
+  Binary,
+  Braces,
+  Layers,
 };
 
 export default function Icon({

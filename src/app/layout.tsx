@@ -1,33 +1,35 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Anonymous_Pro, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 
-const anonymousPro = Anonymous_Pro({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-anonymous-pro",
-});
-
-const robotoMono = Roboto_Mono({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-roboto-mono",
-});
-
 export const metadata: Metadata = {
-  title: "0day Security — Cybersecurity Services, VAPT & Red Teaming",
+  title: "0day Security — We break in before they do.",
   description:
-    "0day Security Team: VAPT, red teaming, application security, compliance advisory, security awareness training and incident response. Hall of Fame and CVE credited offensive security researchers.",
+    "Boutique offensive security lab. VAPT, red teaming, AppSec, cloud, compliance & IR. Manually validated findings, CVE-credited researchers. Delhi + Remote. Est. 2021.",
+  openGraph: {
+    title: "0day Security — Offensive Security Lab",
+    description: "Serious security for serious businesses. From day zero.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${anonymousPro.variable} ${robotoMono.variable} dark bg-black scroll-smooth`}
-    >
-      <body className="bg-black text-white antialiased selection:bg-[#de5cff] selection:text-black">
+    <html lang="en" className="dark bg-[#08080a] scroll-smooth">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Fallback system fonts if Google blocked - will use anonymous pro & roboto mono if available */}
+        <style>{`
+          @import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&family=Roboto+Mono:wght@300;400;500;700&display=swap');
+          :root {
+            --font-anonymous-pro: 'Anonymous Pro', ui-monospace, monospace;
+            --font-roboto-mono: 'Roboto Mono', ui-monospace, monospace;
+            --font-instrument: 'Anonymous Pro', monospace;
+          }
+        `}</style>
+      </head>
+      <body className="bg-[#08080a] text-[#ececec] antialiased selection:bg-[#de5cff] selection:text-black grain vignette">
         {children}
       </body>
     </html>
