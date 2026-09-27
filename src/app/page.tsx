@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PurpleFluidCanvas from "@/components/PurpleFluidCanvas";
 import Icon from "@/components/Icon";
 import {
@@ -28,21 +28,6 @@ import {
   ShieldCheck,
   Clock,
 } from "lucide-react";
-
-interface QuoteSubmission {
-  id: number;
-  companyName: string;
-  contactName: string;
-  contactEmail: string;
-  contactPhone: string;
-  selectedTab: string;
-  selectedServices: string;
-  objectives: string;
-  easterEggDiscount: boolean;
-  estimatedTimeline: string;
-  status: string;
-  createdAt: string;
-}
 
 const STATS = [
   { value: "6", label: "Core Service Lines" },
@@ -75,18 +60,6 @@ export default function ZeroDaySecurityPage() {
     text: string;
     discountApplied?: boolean;
   } | null>(null);
-
-  const [recentQuotes, setRecentQuotes] = useState<QuoteSubmission[]>([]);
-  const [showQuotesModal, setShowQuotesModal] = useState(false);
-
-  useEffect(() => {
-    fetch("/api/quotes")
-      .then((r) => r.json())
-      .then((d) => {
-        if (d.quotes) setRecentQuotes(d.quotes);
-      })
-      .catch(console.error);
-  }, []);
 
   const activeCategoryMeta =
     SERVICE_CATEGORIES.find((c) => c.id === activeCategory) ??
@@ -150,8 +123,6 @@ export default function ZeroDaySecurityPage() {
           text: data.message,
           discountApplied: data.discountApplied,
         });
-        const updated = await fetch("/api/quotes").then((r) => r.json());
-        if (updated.quotes) setRecentQuotes(updated.quotes);
         setCompanyName("");
         setContactName("");
         setContactEmail("");
@@ -200,12 +171,6 @@ export default function ZeroDaySecurityPage() {
             <a href="#contact" className="hover:text-[#de5cff] transition">
               Contact
             </a>
-            <button
-              onClick={() => setShowQuotesModal(true)}
-              className="text-zinc-500 hover:text-[#de5cff] transition cursor-pointer"
-            >
-              Portal ({recentQuotes.length})
-            </button>
           </nav>
 
           <a
@@ -831,14 +796,7 @@ export default function ZeroDaySecurityPage() {
                 </div>
               )}
 
-              <div className="flex flex-wrap items-center justify-between gap-4 pt-1">
-                <button
-                  type="button"
-                  onClick={() => setShowQuotesModal(true)}
-                  className="font-mono-tech text-[11px] text-zinc-500 hover:text-[#de5cff] underline cursor-pointer"
-                >
-                  View {recentQuotes.length} submitted requests
-                </button>
+              <div className="flex flex-wrap items-center justify-end gap-4 pt-1">
                 <button
                   type="submit"
                   disabled={submitting}
@@ -923,7 +881,13 @@ export default function ZeroDaySecurityPage() {
 
           <div className="pt-8 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="font-anonymous text-zinc-500 text-sm">
-              &copy; 2026 0day Security. All rights reserved.
+              &copy; 2026 0day Security. All rights reserved.{" "}
+              <a
+                href="/admin"
+                className="text-zinc-700 hover:text-[#de5cff] transition"
+              >
+                [admin]
+              </a>
             </p>
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -936,92 +900,6 @@ export default function ZeroDaySecurityPage() {
         </div>
       </footer>
 
-      {/* ===================== PORTAL MODAL ===================== */}
-      {showQuotesModal && (
-        <div
-          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4"
-          onClick={() => setShowQuotesModal(false)}
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="bg-[#111] border border-zinc-700 rounded-lg max-w-3xl w-full max-h-[85vh] overflow-y-auto p-6 md:p-8 space-y-5"
-          >
-            <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
-              <div>
-                <h4 className="font-anonymous font-bold text-2xl text-white">
-                  Submitted Scoping Requests
-                </h4>
-                <p className="font-mono-tech text-[11px] text-zinc-500">
-                  Stored in PostgreSQL
-                </p>
-              </div>
-              <button
-                onClick={() => setShowQuotesModal(false)}
-                className="px-3 py-1.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-mono-tech text-xs cursor-pointer"
-              >
-                Close
-              </button>
-            </div>
-
-            {recentQuotes.length === 0 && (
-              <p className="font-mono-tech text-sm text-zinc-500">
-                No requests yet.
-              </p>
-            )}
-
-            {recentQuotes.map((q) => {
-              let services: string[] = [];
-              try {
-                services = JSON.parse(q.selectedServices);
-              } catch {
-                services = [q.selectedServices];
-              }
-              return (
-                <div
-                  key={q.id}
-                  className="p-5 rounded bg-zinc-900/80 border border-zinc-800 space-y-3"
-                >
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div>
-                      <span className="font-anonymous font-bold text-lg text-white">
-                        {q.companyName}
-                      </span>
-                      <span className="font-mono-tech text-[11px] text-zinc-500 ml-3">
-                        {q.contactName} · {q.contactEmail}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {q.easterEggDiscount && (
-                        <span className="px-2 py-0.5 rounded bg-[#de5cff] text-black font-mono-tech font-bold text-[10px]">
-                          5% OFF
-                        </span>
-                      )}
-                      <span className="px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-700/50 font-mono-tech text-[10px]">
-                        {q.status}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {services.map((s, i) => (
-                      <span
-                        key={i}
-                        className="px-2 py-0.5 rounded bg-black border border-zinc-700 font-mono-tech text-[11px] text-[#de5cff]"
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                  {q.objectives && (
-                    <p className="font-mono-tech text-xs text-zinc-400 bg-black/50 p-3 rounded border border-zinc-800/60 whitespace-pre-line">
-                      {q.objectives}
-                    </p>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
     </div>
   );
 }
