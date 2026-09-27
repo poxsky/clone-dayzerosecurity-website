@@ -923,7 +923,13 @@ export default function ZeroDaySecurityPage() {
 
           <div className="pt-8 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="font-anonymous text-zinc-500 text-sm">
-              &copy; 2026 0day Security. All rights reserved.
+              &copy; 2026 0day Security. All rights reserved.{" "}
+              <a
+                href="/admin"
+                className="text-zinc-700 hover:text-[#de5cff] transition"
+              >
+                [admin]
+              </a>
             </p>
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
