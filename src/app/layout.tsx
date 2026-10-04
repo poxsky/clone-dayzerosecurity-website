@@ -16,9 +16,9 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "0day Security — Cybersecurity Services, VAPT & Red Teaming",
+  title: "0day Security — We break it before they do",
   description:
-    "0day Security Team: VAPT, red teaming, application security, compliance advisory, security awareness training and incident response. Hall of Fame and CVE credited offensive security researchers.",
+    "0day Security: Offensive security specialists. VAPT, Red Teaming, AppSec, Compliance. We break it before they do. Hall of Fame & CVE credited research.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
