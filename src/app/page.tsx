@@ -182,10 +182,9 @@ export default function ZeroDaySecurityPage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 h-20 flex items-center justify-between gap-4">
           <a
             href="#top"
-            className="font-anonymous font-bold text-2xl md:text-3xl tracking-tight hover:opacity-90 transition flex items-center gap-2"
+            className="font-anonymous font-bold text-2xl md:text-3xl tracking-tight hover:opacity-90 transition"
           >
-            <span className="text-[#de5cff]">0day</span>
-            <span className="text-white">Security</span>
+            <span className="text-[#de5cff]">0day</span> Security
           </a>
 
           <nav className="hidden lg:flex items-center gap-7 font-mono-tech text-[13px] uppercase tracking-wider text-zinc-300">
@@ -232,9 +231,9 @@ export default function ZeroDaySecurityPage() {
               Testing Group
             </div>
 
-            <h1 className="font-anonymous font-bold uppercase text-white text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] leading-[1.05] tracking-[-0.03em] mb-5">
-              We break it <br />
-              before they do.
+            <h1 className="font-anonymous font-bold uppercase text-white text-5xl sm:text-7xl md:text-8xl lg:text-[6rem] leading-[1.02] tracking-[-0.03em] mb-5">
+              Security. <br />
+              From d<span className="tracking-[-0.08em]">ay</span> zero.
             </h1>
 
             <p className="font-mono-tech text-white/70 font-light text-xl sm:text-2xl md:text-3xl tracking-[-0.02em] max-w-3xl mb-4">
@@ -277,4 +276,4 @@ export default function ZeroDaySecurityPage() {
         </div>
       </section>
 
-      {/* The rest of the page content continues as before. Full file is restored from previous good state with only hero updated. */}
+      {/* Note: Full original content restored to fix build. Tagline change will be re-applied carefully next. */}
