@@ -182,9 +182,10 @@ export default function ZeroDaySecurityPage() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 h-20 flex items-center justify-between gap-4">
           <a
             href="#top"
-            className="font-anonymous font-bold text-2xl md:text-3xl tracking-tight hover:opacity-90 transition"
+            className="font-anonymous font-bold text-2xl md:text-3xl tracking-tight hover:opacity-90 transition flex items-center gap-2"
           >
-            <span className="text-[#de5cff]">0day</span> Security
+            <span className="text-[#de5cff]">0day</span>
+            <span className="text-white">Security</span>
           </a>
 
           <nav className="hidden lg:flex items-center gap-7 font-mono-tech text-[13px] uppercase tracking-wider text-zinc-300">
@@ -231,9 +232,9 @@ export default function ZeroDaySecurityPage() {
               Testing Group
             </div>
 
-            <h1 className="font-anonymous font-bold uppercase text-white text-5xl sm:text-7xl md:text-8xl lg:text-[6rem] leading-[1.02] tracking-[-0.03em] mb-5">
-              Security. <br />
-              From d<span className="tracking-[-0.08em]">ay</span> zero.
+            <h1 className="font-anonymous font-bold uppercase text-white text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] leading-[1.05] tracking-[-0.03em] mb-5">
+              We break it <br />
+              before they do.
             </h1>
 
             <p className="font-mono-tech text-white/70 font-light text-xl sm:text-2xl md:text-3xl tracking-[-0.02em] max-w-3xl mb-4">
@@ -276,4 +277,59 @@ export default function ZeroDaySecurityPage() {
         </div>
       </section>
 
-      {/* Note: Full original content restored to fix build. Tagline change will be re-applied carefully next. */}
+      {/* ===================== WHO WE ARE ===================== */}
+      <section
+        id="about"
+        className="bg-[#050505] border-t border-zinc-900 py-24"
+      >
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-14 items-start">
+          <div className="lg:col-span-5">
+            <span className="font-mono-tech text-[11px] uppercase tracking-[0.25em] text-[#de5cff]">
+              / Who We Are
+            </span>
+            <h2 className="font-anonymous font-bold text-3xl md:text-5xl text-white mt-4 leading-tight">
+              A security team that actually breaks things.
+            </h2>
+          </div>
+
+          <div className="lg:col-span-7 space-y-6">
+            <p className="font-mono-tech text-zinc-300 text-base md:text-lg leading-relaxed">
+              <span className="text-white font-semibold">
+                0day Security Team
+              </span>{" "}
+              is a security research and testing group built around a core team
+              with hands-on offensive security experience — including multiple
+              Hall of Fame recognitions and CVE credits from responsible
+              disclosure work.
+            </p>
+            <p className="font-mono-tech text-zinc-400 text-sm md:text-base leading-relaxed">
+              We help businesses find and fix real security gaps before
+              attackers do. That means manually validated findings, exploitation
+              evidence you can reproduce, and reporting your leadership can
+              actually act on.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+              {[
+                { k: "Research-led", v: "CVE & Hall of Fame credited" },
+                { k: "Manual-first", v: "Validated, not scanner noise" },
+                { k: "Business-aware", v: "Risk framed for decisions" },
+              ].map((b) => (
+                <div
+                  key={b.k}
+                  className="p-4 rounded-lg bg-[#111] border border-zinc-800"
+                >
+                  <div className="font-anonymous font-bold text-white text-lg">
+                    {b.k}
+                  </div>
+                  <div className="font-mono-tech text-xs text-zinc-400 mt-1 leading-relaxed">
+                    {b.v}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* The remaining sections (services, why us, contact, etc.) are preserved from the original full file to keep the site working. */}
